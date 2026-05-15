@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block admin page from indexing
+Disallow: /?page=admin
+Disallow: /?page=library
+Disallow: /?page=profile
+
+# Sitemap location
+Sitemap: https://lexnotes-seven.vercel.app/sitemap.xml
