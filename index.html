@@ -1,0 +1,2565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── PRIMARY META ── -->
+  <title>LexNotes — Law School Notes Marketplace India</title>
+  <meta name="description" content="Buy and sell premium law school notes from top Indian law colleges. Curated study material for BA LLB, BBA LLB, LLM students across India. 4,800+ note sets." />
+  <meta name="keywords" content="law school notes India, law notes marketplace, BA LLB notes, BBA LLB notes, legal study material India, constitutional law notes, IPC notes, law college notes" />
+  <meta name="author" content="LexNotes" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://lexnotes-seven.vercel.app/" />
+
+  <!-- ── OPEN GRAPH ── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://lexnotes-seven.vercel.app/" />
+  <meta property="og:title"       content="LexNotes — Law School Notes Marketplace India" />
+  <meta property="og:description" content="Buy and sell premium law school notes from top Indian law colleges. 4,800+ note sets across Constitutional Law, Contract, Criminal, IPC and more." />
+  <meta property="og:image"       content="https://lexnotes-seven.vercel.app/hero-bg.png" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name"   content="LexNotes" />
+  <meta property="og:locale"      content="en_IN" />
+
+  <!-- ── TWITTER / X CARD ── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:site"        content="@lexnotes" />
+  <meta name="twitter:title"       content="LexNotes — Law School Notes Marketplace India" />
+  <meta name="twitter:description" content="Buy and sell premium law school notes from top Indian law colleges. 4,800+ note sets. Built for India's next generation of lawyers." />
+  <meta name="twitter:image"       content="https://lexnotes-seven.vercel.app/hero-bg.png" />
+
+  <!-- ── SCHEMA.ORG STRUCTURED DATA ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "LexNotes",
+    "url": "https://lexnotes-seven.vercel.app/",
+    "description": "India's premier marketplace for law school study notes. Buy and sell curated legal study material from top law colleges.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://lexnotes-seven.vercel.app/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "LexNotes",
+      "url": "https://lexnotes-seven.vercel.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lexnotes-seven.vercel.app/hero-bg.png"
+      },
+      "sameAs": []
+    }
+  }
+  </script>
+
+  <!-- ── FAVICONS ── -->
+  <link rel="icon" type="image/x-icon"    href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180"    href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1a1714" />
+
+  <!-- ── PERFORMANCE HINTS ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://kvzdfpttomgnjjstifjc.supabase.co" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --parchment: #f5f0e8;
+      --white: #fafaf8;
+      --ink: #1a1714;
+      --ink2: #2c2825;
+      --sienna: #b5714a;
+      --sienna2: #c8896a;
+      --stone: #8a8278;
+      --border: #e0d8cc;
+      --border2: #ccc4b6;
+      --charcoal: #1e1c1a;
+      --cream: #f0ebe0;
+      --success: #2d6a4f;
+      --danger: #8b2635;
+      --shadow-sm: 0 1px 4px rgba(26,23,20,0.06);
+      --shadow: 0 4px 20px rgba(26,23,20,0.09);
+      --shadow-lg: 0 12px 48px rgba(26,23,20,0.14);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; width: 100%; overflow-x: hidden; }
+    body { font-family: 'Instrument Sans', sans-serif; background: var(--white); color: var(--ink); min-height: 100vh; line-height: 1.6; width: 100%; max-width: 100%; overflow-x: hidden; }
+    #root { width: 100%; max-width: 100%; overflow-x: hidden; }
+    img, svg, video, canvas, iframe { max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    input, select, textarea { font-family: inherit; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--parchment); }
+    ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+    /* ── NAVBAR ── */
+    .navbar { background: var(--white); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 200; }
+    .nav-inner { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-width: 0; }
+    .logo { display: flex; align-items: center; gap: 0.6rem; flex: 0 0 auto; font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 600; letter-spacing: 0.01em; color: var(--ink); cursor: pointer; }
+    .logo-sq { width: 26px; height: 26px; border: 1.5px solid var(--ink); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+    .nav-links { display: flex; align-items: center; gap: 0.25rem; min-width: 0; }
+    .nav-btn { color: var(--stone); padding: 0.4rem 0.9rem; font-size: 0.84rem; font-weight: 500; letter-spacing: 0.02em; border-radius: 4px; transition: color 0.2s; }
+    .nav-btn:hover { color: var(--ink); }
+    .nav-btn.active { color: var(--ink); font-weight: 600; }
+    .nav-right { display: flex; align-items: center; gap: 0.55rem; min-width: 0; flex-shrink: 1; }
+    .cart-btn { font-size: 0.84rem; color: var(--stone); padding: 0.4rem 0.85rem; border: 1px solid var(--border); border-radius: 4px; position: relative; transition: all 0.2s; }
+    .cart-btn:hover { color: var(--ink); border-color: var(--ink); }
+    .cart-badge { position: absolute; top: -6px; right: -6px; background: var(--sienna); color: white; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 700; }
+    .btn-ghost { font-size: 0.84rem; color: var(--ink); font-weight: 500; letter-spacing: 0.02em; padding: 0.4rem 0.85rem; transition: color 0.2s; }
+    .btn-ghost:hover { color: var(--sienna); }
+    .btn-gold { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: var(--ink); color: var(--white); padding: 0.5rem 1.25rem; border-radius: 3px; transition: background 0.2s; }
+    .btn-gold:hover { background: var(--sienna); }
+    .user-chip { display: flex; align-items: center; gap: 0.65rem; font-size: 0.83rem; color: var(--stone); min-width: 0; }
+    .user-chip button:first-child { max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .btn-logout { color: var(--sienna); font-size: 0.79rem; text-decoration: underline; }
+    .btn-library { color: var(--ink); font-size: 0.79rem; font-weight: 600; }
+    .hamburger { display: none; font-size: 1.25rem; color: var(--ink); }
+
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: pageFadeUp 0.9s ease forwards;
+    }
+
+    @keyframes pageFadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── HERO ── */
+    .hero { width: 100%; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); min-height: 88vh; max-height: 860px; overflow: hidden; }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: clamp(3rem,6vw,5rem) clamp(1.25rem,5vw,5rem); background: var(--parchment); border-right: 1px solid var(--border); }
+    .hero-eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); margin-bottom: 2rem; }
+    .hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.45rem, 7vw, 4.2rem); font-weight: 400; line-height: 1.08; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 1.75rem; }
+    .hero-h1 em { font-style: italic; color: var(--sienna); }
+    .hero-sub { font-size: 0.95rem; color: var(--stone); line-height: 1.75; max-width: 440px; margin-bottom: 3rem; }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-hero-primary { background: var(--ink); color: white; padding: 0.85rem 2rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; border-radius: 3px; transition: all 0.2s; cursor: pointer; border: none; }
+    .btn-hero-primary:hover { background: var(--sienna); }
+
+    .btn-hero-primary,
+    .btn-cart,
+    .btn-gold {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-hero-primary::before,
+    .btn-cart::before,
+    .btn-gold::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.22),
+        transparent
+      );
+      transform: skewX(-20deg);
+    }
+
+    .btn-hero-primary:hover::before,
+    .btn-cart:hover::before,
+    .btn-gold:hover::before {
+      animation: sheen 0.9s ease;
+    }
+
+    @keyframes sheen {
+      from { left: -120%; }
+      to { left: 160%; }
+    }
+
+
+    .btn-hero-ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink2); padding: 0.85rem 2rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; border-radius: 3px; transition: all 0.2s; cursor: pointer; }
+    .btn-hero-ghost:hover { border-color: var(--sienna); color: var(--sienna); }
+    .hero-stats { display: flex; gap: clamp(1rem,4vw,2.5rem); flex-wrap: wrap; margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+    .hstat strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--ink); line-height: 1; }
+    .hstat span { font-size: 0.72rem; color: var(--stone); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.25rem; display: block; }
+    .hero-right { background: var(--charcoal); display: flex; flex-direction: column; justify-content: flex-end; padding: 2.5rem; position: relative; overflow: hidden; min-width: 0; }
+    .hero-bg-text { position: absolute; inset: 0; z-index: 0; font-family: 'Cormorant Garamond', serif; font-size: 20rem; font-weight: 700; color: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: center; letter-spacing: -0.05em; user-select: none; }
+.hero-image-option {
+  background:
+    linear-gradient(rgba(245,240,232,0.15), rgba(245,240,232,0.15)),
+    url("./hero-bg.png");
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+    /* ── SECTIONS ── */
+    .section { width: 100%; max-width: 1320px; margin: 0 auto; padding: clamp(3rem,6vw,5rem) clamp(1rem,4vw,2.5rem); overflow-x: hidden; }
+    .section-dark { background: var(--charcoal); }
+    .sec-eyebrow { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--stone); margin-bottom: 1rem; }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 400; color: var(--ink); letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+    .sec-title em { font-style: italic; color: var(--sienna); }
+    .sec-title.light { color: white; }
+    .sec-title.center { text-align: center; width: 100%; }
+    .sec-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3rem; }
+    .sec-link { font-size: 0.8rem; color: var(--stone); text-decoration: underline; cursor: pointer; transition: color 0.2s; }
+    .sec-link:hover { color: var(--ink); }
+    .sec-link.light { color: rgba(255,255,255,0.4); }
+    .sec-link.light:hover { color: white; }
+    .divider { width: 40px; height: 1px; background: var(--sienna); margin: 1rem 0 2.5rem; }
+
+    /* ── SUBJECT CARDS ── */
+    .subjects-grid { width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .scard { background: var(--white); padding: 1.75rem 1.5rem; cursor: pointer; transition: background 0.2s; }
+    .scard:hover { background: var(--parchment); }
+    .scard-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+    .scard-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.35rem; }
+    .scard-desc { font-size: 0.75rem; color: var(--stone); line-height: 1.5; margin-bottom: 0.75rem; }
+    .scard-count { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sienna); font-weight: 600; }
+
+    /* ── NOTE CARDS ── */
+    .notes-grid { width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .ncard { background: var(--white); padding: 2rem; transition: background 0.2s; }
+    .ncard:hover { background: var(--parchment); }
+    .nsubj { font-size: 0.67rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sienna); font-weight: 600; margin-bottom: 0.75rem; }
+    .ntitle { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); line-height: 1.35; margin-bottom: 0.75rem; }
+    .nmeta { font-size: 0.76rem; color: var(--stone); line-height: 1.6; margin-bottom: 1rem; }
+    .ndetails { font-size: 0.76rem; color: var(--stone); margin-bottom: 1.5rem; }
+    .nfooter { display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    .nprice { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); }
+    .btn-cart { background: var(--ink); color: white; padding: 0.42rem 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; border-radius: 3px; transition: background 0.2s; }
+    .btn-cart:hover { background: var(--sienna); }
+
+
+    .ncard,
+    .scard,
+    .testi-card,
+    .step-card {
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
+    }
+
+    .ncard:hover,
+    .scard:hover,
+    .testi-card:hover,
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    /* ── SKELETON ── */
+    .skeleton-card { background: var(--white); padding: 2rem; border: 1px solid var(--border); }
+    .skel { border-radius: 2px; margin-bottom: 0.75rem; background: linear-gradient(90deg, var(--parchment) 25%, var(--cream) 50%, var(--parchment) 75%); background-size: 200% 100%; animation: shimmer 1.6s infinite; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* ── HOW IT WORKS ── */
+    .steps { width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--border); }
+    .step-card { padding: 2.5rem 2rem; border-right: 1px solid var(--border); background: var(--white); }
+    .step-card:last-child { border-right: none; }
+    .step-n { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300; color: var(--border2); line-height: 1; margin-bottom: 1.25rem; }
+    .step-t { font-weight: 600; font-size: 0.92rem; color: var(--ink); margin-bottom: 0.5rem; letter-spacing: 0.01em; }
+    .step-d { font-size: 0.82rem; color: var(--stone); line-height: 1.65; }
+
+    /* ── TESTIMONIALS ── */
+    .testi-grid { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .testi-card { background: var(--white); padding: 2.5rem 2rem; }
+    .testi-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; color: var(--sienna); line-height: 1; margin-bottom: 1.25rem; }
+    .testi-body { font-size: 0.92rem; color: var(--ink2); line-height: 1.75; margin-bottom: 1.75rem; }
+    .testi-author { font-size: 0.8rem; color: var(--stone); }
+    .testi-author strong { display: block; color: var(--ink); font-weight: 600; margin-bottom: 0.1rem; }
+
+    /* ── CTA STRIP ── */
+    .cta-strip { background: var(--charcoal); padding: 6rem 5rem; text-align: center; }
+    .cta-eyebrow { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1.5rem; }
+    .cta-h2 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 400; color: white; line-height: 1.1; margin-bottom: 0.75rem; }
+    .cta-h2 em { font-style: italic; color: var(--sienna2); }
+    .cta-sub { font-size: 0.9rem; color: rgba(255,255,255,0.45); margin-bottom: 2.5rem; line-height: 1.65; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-cta-primary { background: white; color: var(--ink); padding: 0.85rem 2rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; border-radius: 3px; transition: all 0.2s; border: none; cursor: pointer; }
+    .btn-cta-primary:hover { background: var(--sienna); color: white; }
+    .btn-cta-ghost { border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7); padding: 0.85rem 2rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; border-radius: 3px; transition: all 0.2s; cursor: pointer; }
+    .btn-cta-ghost:hover { border-color: rgba(255,255,255,0.6); color: white; }
+
+    /* ── PAGES ── */
+    .page-wrap { width: 100%; max-width: 1320px; margin: 0 auto; padding: clamp(2rem,5vw,3rem) clamp(1rem,4vw,2.5rem); overflow-x: hidden; }
+    .page-hero { width: 100%; background: var(--parchment); border-bottom: 1px solid var(--border); padding: clamp(2.5rem,6vw,3.5rem) clamp(1rem,4vw,2.5rem); overflow-x: hidden; }
+    .page-hero-inner { max-width: 1320px; margin: 0 auto; }
+    .page-h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 400; color: var(--ink); margin-bottom: 0.35rem; }
+    .page-sub-text { font-size: 0.88rem; color: var(--stone); }
+    .controls { width: 100%; display: flex; gap: 0; margin-bottom: 2rem; border: 1px solid var(--border); min-width: 0; }
+    .search-box { flex: 1 1 auto; min-width: 0; padding: 0.75rem 1.15rem; border: none; border-right: 1px solid var(--border); font-size: 0.88rem; background: var(--white); color: var(--ink); outline: none; font-family: inherit; }
+    .search-box::placeholder { color: var(--stone); }
+    .sel { padding: 0.75rem 1rem; min-width: 0; max-width: 100%; border: none; border-right: 1px solid var(--border); font-size: 0.84rem; background: var(--white); color: var(--ink); cursor: pointer; outline: none; appearance: none; min-width: 160px; }
+    .sel:last-child { border-right: none; }
+    .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.5rem; }
+    .pill { background: var(--white); border: 1px solid var(--border); padding: 0.28rem 0.8rem; font-size: 0.75rem; cursor: pointer; transition: all 0.18s; color: var(--stone); border-radius: 2px; }
+    .pill:hover { border-color: var(--ink); color: var(--ink); }
+    .pill.on { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .empty { text-align: center; padding: 4rem; color: var(--stone); font-size: 0.92rem; }
+    .back-btn { font-size: 0.8rem; color: var(--stone); text-decoration: underline; margin-bottom: 2rem; cursor: pointer; display: inline-block; transition: color 0.2s; }
+    .back-btn:hover { color: var(--ink); }
+
+    /* ── SUBJECT PAGE ── */
+    .subj-header { display: flex; align-items: center; gap: 1.5rem; background: var(--parchment); border: 1px solid var(--border); padding: 2rem; margin-bottom: 2.5rem; }
+    .subj-icon { font-size: 2.5rem; }
+
+    /* ── SELL ── */
+    .sell-grid { width: 100%; display: grid; grid-template-columns: minmax(0,1fr) minmax(260px,320px); gap: 2.5rem; align-items: start; }
+    .form-card { background: var(--white); border: 1px solid var(--border); padding: 2.5rem; }
+    .form-sec-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; color: var(--ink); margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .flabel { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--stone); margin-bottom: 0.4rem; margin-top: 1.25rem; }
+    .req { color: var(--sienna); }
+    .finput { width: 100%; padding: 0.7rem 0.95rem; border: 1px solid var(--border); font-size: 0.9rem; background: var(--parchment); color: var(--ink); transition: border 0.2s; outline: none; border-radius: 0; font-family: inherit; }
+    .finput:focus { border-color: var(--ink); background: var(--white); }
+    .ftextarea { min-height: 100px; resize: vertical; }
+    .two-col { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+    .upload-zone { border: 1px dashed var(--border2); padding: 2.5rem; text-align: center; color: var(--stone); font-size: 0.84rem; margin: 1rem 0; cursor: pointer; transition: all 0.2s; }
+    .upload-zone:hover { border-color: var(--ink); color: var(--ink); }
+    .btn-full { width: 100%; padding: 0.9rem; background: var(--ink); color: white; font-weight: 600; font-size: 0.84rem; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; margin-top: 1rem; }
+    .btn-full:hover { background: var(--sienna); }
+    .btn-full:disabled { opacity: 0.5; cursor: not-allowed; }
+    .sidebar-card { background: var(--white); border: 1px solid var(--border); padding: 1.75rem; margin-bottom: 1rem; }
+    .sidebar-h { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-bottom: 1.25rem; }
+    .earn-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.86rem; color: var(--ink2); }
+    .earn-row:last-child { border: none; }
+    .earn-row.hl { color: var(--success); font-weight: 700; }
+    .guide-ul { list-style: none; font-size: 0.82rem; color: var(--stone); display: flex; flex-direction: column; gap: 0.55rem; }
+    .guide-ul li::before { content: "— "; color: var(--sienna); }
+
+    /* ── AUTH ── */
+    .auth-page { min-height: calc(100vh - 62px); display: flex; align-items: center; justify-content: center; padding: 2rem; background: var(--parchment); }
+    .auth-card { background: var(--white); border: 1px solid var(--border); padding: 3rem; width: 100%; max-width: 420px; }
+    .auth-logo { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 500; color: var(--ink); margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .auth-logo-sq { width: 28px; height: 28px; border: 1.5px solid var(--ink); display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+    .auth-h { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; color: var(--ink); margin-bottom: 0.4rem; }
+    .auth-sub { font-size: 0.84rem; color: var(--stone); margin-bottom: 2rem; line-height: 1.6; }
+    .auth-divider { width: 30px; height: 1px; background: var(--sienna); margin: 0.75rem 0 2rem; }
+    .auth-switch { text-align: center; margin-top: 1.5rem; font-size: 0.83rem; color: var(--stone); }
+    .link-btn { color: var(--sienna); font-weight: 600; cursor: pointer; }
+    .locked-box { text-align: center; background: var(--white); border: 1px solid var(--border); padding: 3.5rem 2.5rem; max-width: 440px; margin: 0 auto; }
+    .locked-box h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; color: var(--ink); margin: 0.75rem 0 0.5rem; }
+    .locked-box p { color: var(--stone); margin-bottom: 2rem; font-size: 0.88rem; }
+    .center-page { display: flex; align-items: center; justify-content: center; min-height: 55vh; }
+    .error-banner { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 1rem 1.5rem; margin-bottom: 1.5rem; font-size: 0.84rem; line-height: 1.6; }
+
+    /* ── CART DRAWER ── */
+    .overlay { position: fixed; inset: 0; background: rgba(26,23,20,0.4); z-index: 300; }
+    .drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 380px; max-width: 100%; background: var(--white); z-index: 301; box-shadow: -4px 0 30px rgba(26,23,20,0.15); display: flex; flex-direction: column; border-left: 1px solid var(--border); }
+    .drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .drawer-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--ink); }
+    .close-x { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; color: var(--stone); transition: color 0.2s; font-size: 0.9rem; }
+    .close-x:hover { color: var(--ink); }
+    .drawer-body { flex: 1; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font-size: 0.83rem; color: var(--stone); }
+    .cart-item strong { display: block; margin-bottom: 0.2rem; color: var(--ink); font-size: 0.85rem; font-weight: 600; }
+    .remove-x { color: var(--border2); font-size: 0.85rem; transition: color 0.2s; }
+    .remove-x:hover { color: var(--danger); }
+    .drawer-foot { padding: 1.5rem; border-top: 1px solid var(--border); }
+    .cart-total { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+    .cart-total span { font-size: 0.8rem; color: var(--stone); letter-spacing: 0.05em; text-transform: uppercase; }
+    .cart-total strong { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--ink); }
+    .cart-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem; color: var(--stone); font-size: 0.88rem; text-align: center; }
+
+    /* ── TOAST ── */
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); max-width: calc(100vw - 2rem); color: white; padding: 0.8rem 1.75rem; font-size: 0.83rem; font-weight: 500; z-index: 500; white-space: nowrap; pointer-events: none; animation: fadeUp 0.3s ease; letter-spacing: 0.03em; border-radius: 2px; }
+    @keyframes fadeUp { from{opacity:0;transform:translateX(-50%) translateY(8px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+    /* ── COMMUNITY ── */
+    .comm-layout { width: 100%; display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 2.5rem; align-items: start; }
+    .comm-sidebar { background: var(--white); border: 1px solid var(--border); overflow: hidden; position: sticky; top: 80px; }
+    .comm-sidebar-title { padding: 1rem 1.25rem; font-size: 0.67rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--stone); border-bottom: 1px solid var(--border); }
+    .comm-thread-btn { width: 100%; text-align: left; padding: 0.85rem 1.25rem; font-size: 0.84rem; color: var(--stone); border-bottom: 1px solid var(--border); transition: all 0.15s; font-weight: 500; }
+    .comm-thread-btn:hover { background: var(--parchment); color: var(--ink); }
+    .comm-thread-btn.active { background: var(--ink); color: white; font-weight: 600; }
+    .comm-main { display: flex; flex-direction: column; gap: 1rem; }
+    .comm-post { background: var(--white); border: 1px solid var(--border); padding: 1.75rem; }
+    .comm-post-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .comm-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--parchment); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; overflow: hidden; flex-shrink: 0; }
+    .comm-author { font-weight: 600; font-size: 0.84rem; color: var(--ink); }
+    .comm-time { font-size: 0.72rem; color: var(--stone); }
+    .comm-tag { font-size: 0.67rem; background: var(--parchment); color: var(--stone); padding: 0.15rem 0.55rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-left: auto; }
+    .comm-body { font-size: 0.9rem; line-height: 1.7; color: var(--ink2); margin-bottom: 1rem; }
+    .comm-actions { display: flex; gap: 1rem; align-items: center; }
+    .comm-action-btn { font-size: 0.78rem; color: var(--stone); display: flex; align-items: center; gap: 0.3rem; transition: color 0.2s; }
+    .comm-action-btn:hover { color: var(--ink); }
+    .comm-replies { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.75rem; }
+    .comm-reply { display: flex; gap: 0.75rem; }
+    .comm-reply-body { flex: 1; background: var(--parchment); padding: 0.75rem 1rem; font-size: 0.84rem; color: var(--ink2); line-height: 1.55; }
+    .comm-reply-author { font-weight: 600; color: var(--ink); font-size: 0.8rem; margin-bottom: 0.2rem; }
+    .comm-compose { background: var(--white); border: 1px solid var(--border); padding: 1.75rem; }
+    .comm-compose textarea { width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border); font-size: 0.88rem; resize: vertical; min-height: 90px; outline: none; font-family: inherit; background: var(--parchment); color: var(--ink); transition: border 0.2s; }
+    .comm-compose textarea:focus { border-color: var(--ink); background: var(--white); }
+    .comm-compose-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; }
+    .btn-post { background: var(--ink); color: white; padding: 0.48rem 1.25rem; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; transition: background 0.2s; }
+    .btn-post:hover { background: var(--sienna); }
+    .btn-post:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── PROFILE TABS ── */
+    .tab-bar { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .tab-btn { padding: 0.75rem 1.5rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--stone); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active-tab { color: var(--ink); border-bottom-color: var(--ink); }
+    .tab-btn.gold-tab.active-tab { color: var(--sienna); border-bottom-color: var(--sienna); }
+
+    /* ── ADMIN PANEL ── */
+    .admin-wrap { width: 100%; max-width: 1320px; margin: 0 auto; padding: clamp(1rem,4vw,2.5rem); overflow-x: hidden; }
+    .admin-header { background: var(--charcoal); color: white; padding: 2rem 2.5rem; }
+    .admin-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; }
+    .admin-header p { font-size: 0.82rem; color: rgba(255,255,255,0.45); margin-top: 0.25rem; }
+    .admin-nav { background: var(--ink); display: flex; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .admin-nav-btn { padding: 0.85rem 1.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); transition: all 0.2s; border-right: 1px solid rgba(255,255,255,0.08); }
+    .admin-nav-btn:hover { color: white; background: rgba(255,255,255,0.05); }
+    .admin-nav-btn.active { color: white; background: var(--sienna); }
+    .admin-stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2.5rem; }
+    .admin-stat { background: var(--white); padding: 1.75rem; text-align: center; }
+    .admin-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 600; color: var(--ink); line-height: 1; }
+    .admin-stat-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-top: 0.4rem; }
+    .admin-table-wrap { background: var(--white); border: 1px solid var(--border); overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 2rem; }
+    .admin-table-head { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .admin-table-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; color: var(--ink); }
+    table.admin-table { width:100%; min-width: 760px; border-collapse:collapse; font-size:0.84rem; }
+    table.admin-table th { padding: 0.75rem 1rem; text-align:left; font-size:0.67rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--stone); background:var(--parchment); border-bottom:1px solid var(--border); }
+    table.admin-table td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--border); color: var(--ink2); }
+    table.admin-table tr:last-child td { border-bottom: none; }
+    table.admin-table tr:hover td { background: var(--parchment); }
+    .badge { display: inline-block; padding: 0.18rem 0.6rem; font-size: 0.67rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 2px; }
+    .badge-pending { background: #fef3c7; color: #92400e; }
+    .badge-approved { background: #d1fae5; color: #065f46; }
+    .badge-active { background: #d1fae5; color: #065f46; }
+    .badge-banned { background: #fee2e2; color: #991b1b; }
+    .admin-action-btn { font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.7rem; border: 1px solid var(--border); color: var(--ink); transition: all 0.2s; margin-right: 0.3rem; cursor: pointer; }
+    .admin-action-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+    .admin-action-btn.danger { border-color: #fecaca; color: var(--danger); }
+    .admin-action-btn.danger:hover { background: var(--danger); color: white; border-color: var(--danger); }
+    .admin-action-btn.success { border-color: #a7f3d0; color: var(--success); }
+    .admin-action-btn.success:hover { background: var(--success); color: white; border-color: var(--success); }
+    .admin-login { min-height: calc(100vh - 62px); display: flex; align-items: center; justify-content: center; background: var(--charcoal); }
+    .admin-login-card { background: var(--white); padding: 3rem; width: 100%; max-width: 380px; }
+    .admin-login-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 400; margin-bottom: 0.35rem; }
+    .admin-login-card p { font-size: 0.82rem; color: var(--stone); margin-bottom: 2rem; }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--charcoal); color: white; }
+    .footer-top { width: 100%; max-width: 1320px; margin: 0 auto; padding: 4rem 2.5rem 3rem; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; color: white; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+    .footer-logo-sq { width: 22px; height: 22px; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+    .footer-tagline { font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.65; max-width: 220px; }
+    .footer-col-title { font-size: 0.65rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.25rem; font-weight: 700; }
+    .footer-links-col { display: flex; flex-direction: column; gap: 0.65rem; }
+    .flink { color: rgba(255,255,255,0.5); font-size: 0.83rem; text-decoration: none; transition: color 0.2s; cursor: pointer; background: none; border: none; font-family: inherit; text-align: left; }
+    .flink:hover { color: rgba(255,255,255,0.85); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); width: 100%; max-width: 1320px; margin: 0 auto; padding: 1.25rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+    .footer-copy { font-size: 0.74rem; color: rgba(255,255,255,0.2); }
+    .footer-latin { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.85rem; color: rgba(255,255,255,0.2); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; max-height: none; }
+      .hero-right { min-height: 280px; }
+      .steps { grid-template-columns: repeat(2,1fr); }
+      .step-card:nth-child(2) { border-right: none; }
+      .step-card { border-bottom: 1px solid var(--border); }
+      .step-card:nth-child(3), .step-card:nth-child(4) { border-bottom: none; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .sell-grid { grid-template-columns: 1fr; }
+      .comm-layout { grid-template-columns: 1fr; }
+      .comm-sidebar { position: static; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .admin-stats { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero-left { padding: 3rem 1.75rem; }
+      .hero-h1 { font-size: 3rem; }
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .controls { flex-direction: column; }
+      .steps { grid-template-columns: 1fr; }
+      .step-card { border-right: none !important; }
+      .footer-top { grid-template-columns: 1fr; }
+      .admin-stats { grid-template-columns: 1fr 1fr; }
+      .cta-h2 { font-size: 2.4rem; }
+      .cta-strip { padding: 4rem 2rem; }
+    }
+    @media (max-width: 520px) {
+      .drawer { width: 100%; }
+      .hero-h1 { font-size: 2.4rem; }
+    }
+
+
+    /* ── MOBILE OVERFLOW PATCH ────────────────────────────────────────── */
+    html, body, #root { width: 100%; max-width: 100%; overflow-x: hidden; }
+    body { position: relative; }
+    img, video, iframe, embed, object { max-width: 100%; height: auto; }
+    table { max-width: 100%; }
+    .navbar, .hero, .section, .section-dark, .page-wrap, .page-hero, .footer, .admin-wrap, .admin-header, .admin-nav { width: 100%; max-width: 100%; overflow-x: hidden; }
+    .nav-inner, .section, .page-wrap, .page-hero-inner, .footer-top, .footer-bottom { width: 100%; max-width: 1320px; }
+    .notes-grid, .subjects-grid, .testi-grid, .steps, .admin-stats, .sell-grid, .comm-layout { min-width: 0; max-width: 100%; }
+    .ncard, .scard, .testi-card, .step-card, .form-card, .sidebar-card, .comm-post, .comm-compose, .locked-box, .auth-card { min-width: 0; max-width: 100%; }
+    .ntitle, .comm-body, .testi-body, .hero-h1, .hero-sub, .page-h1 { overflow-wrap: anywhere; word-break: normal; }
+    .admin-table-wrap { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table.admin-table { min-width: 680px; }
+    .drawer { max-width: min(100vw, 380px); }
+    .preview-link { color: var(--sienna); font-weight: 600; font-size: 0.76rem; text-decoration: underline; margin-left: 0.75rem; white-space: nowrap; }
+    .status-actions { display:flex; gap:0.35rem; flex-wrap:wrap; }
+
+    .preview-modal-overlay { position: fixed; inset: 0; background: rgba(26,23,20,0.62); z-index: 650; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    .preview-modal { width: min(1100px, 96vw); height: min(86vh, 820px); background: var(--white); border: 1px solid var(--border); box-shadow: var(--shadow-lg); display: flex; flex-direction: column; overflow: hidden; }
+    .preview-modal-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); background: var(--parchment); }
+    .preview-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; color: var(--ink); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .preview-modal-close { flex: 0 0 auto; padding: 0.35rem 0.75rem; border: 1px solid var(--border2); color: var(--ink); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .preview-modal-close:hover { background: var(--ink); color: white; border-color: var(--ink); }
+    .preview-frame { width: 100%; height: 100%; border: 0; background: white; }
+    .preview-fallback { padding: 0.75rem 1.25rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--stone); background: var(--white); }
+    .preview-fallback a { color: var(--sienna); font-weight: 600; text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .nav-inner { padding: 0 1rem; gap: 0.6rem; }
+      .nav-right { gap: 0.45rem; min-width: 0; }
+      .user-chip { max-width: 44vw; overflow: hidden; gap: 0.45rem; }
+      .user-chip button:first-child { max-width: 24vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .cart-btn { padding: 0.36rem 0.58rem; }
+      .logo { font-size: 1.25rem; flex-shrink: 0; }
+      .hero { grid-template-columns: minmax(0,1fr); min-height: auto; max-height: none; }
+      .hero-left { padding: 3.25rem 1.25rem; border-right: 0; }
+      .hero-right { min-height: 260px; padding: 1rem; }
+      .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.25rem; }
+      .hero-ctas, .cta-btns { width: 100%; }
+      .btn-hero-primary, .btn-hero-ghost, .btn-cta-primary, .btn-cta-ghost { flex: 1 1 100%; text-align: center; }
+      .section, .page-wrap { padding-left: 1rem; padding-right: 1rem; }
+      .page-hero { padding-left: 1rem; padding-right: 1rem; }
+      .sec-head, .admin-table-head, .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .controls { flex-direction: column; width: 100%; }
+      .search-box, .sel { width: 100%; min-width: 0; border-right: none; border-bottom: 1px solid var(--border); }
+      .sel:last-child { border-bottom: none; }
+      .notes-grid, .subjects-grid { grid-template-columns: 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .admin-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .admin-nav-btn { flex: 0 0 auto; }
+    }
+
+    @media (max-width: 520px) {
+      .hero-h1 { font-size: clamp(2.25rem, 14vw, 3rem); }
+      .page-h1 { font-size: 2.25rem; }
+      .cta-h2 { font-size: 2.15rem; }
+      .section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+      .form-card, .comm-post, .comm-compose, .auth-card, .locked-box { padding: 1.25rem; }
+      .upload-zone { padding: 1.5rem 1rem; }
+      .admin-wrap { padding: 1rem; }
+      .admin-header { padding: 1.5rem 1rem; }
+      .admin-stats { grid-template-columns: 1fr; }
+      .footer-top { padding: 3rem 1rem 2rem; }
+      .footer-bottom { padding: 1.25rem 1rem; }
+      .toast { max-width: calc(100vw - 2rem); white-space: normal; text-align: center; }
+    }
+
+
+
+    /* ── OVERFLOW SAFETY PATCH ── */
+    .navbar, .hero, .section, .section-dark, .page-wrap, .page-hero, .cta-strip, .footer { max-width: 100%; overflow-x: hidden; }
+    .scard, .ncard, .form-card, .sidebar-card, .comm-post, .comm-compose, .locked-box, .auth-card { min-width: 0; }
+    .ntitle, .nmeta, .ndetails, .comm-body, .comm-reply-body, .testi-body { overflow-wrap: anywhere; word-break: break-word; }
+
+    /* ── COOKIE BANNER ── */
+    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: var(--charcoal); border-top: 1px solid rgba(255,255,255,0.08); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; z-index: 600; flex-wrap: wrap; }
+    .cookie-text { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.55; flex: 1; min-width: 200px; }
+    .cookie-text a { color: var(--sienna2); text-decoration: underline; cursor: pointer; }
+    .cookie-btns { display: flex; gap: 0.65rem; flex-shrink: 0; flex-wrap: wrap; }
+    .cookie-accept { background: var(--sienna); color: white; padding: 0.5rem 1.25rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; border-radius: 2px; border: none; cursor: pointer; transition: background 0.2s; }
+    .cookie-accept:hover { background: var(--sienna2); }
+    .cookie-decline { background: transparent; color: rgba(255,255,255,0.4); padding: 0.5rem 1rem; font-size: 0.78rem; border: 1px solid rgba(255,255,255,0.15); border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+    .cookie-decline:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.3); }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top { position: fixed; bottom: 2rem; right: 1.5rem; width: 38px; height: 38px; background: var(--ink); color: white; border: none; border-radius: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; z-index: 400; opacity: 0; pointer-events: none; transition: opacity 0.3s, background 0.2s; }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; }
+    .back-to-top:hover { background: var(--sienna); }
+
+    /* ── FORGOT PASSWORD ── */
+    .forgot-link { display: block; text-align: right; font-size: 0.78rem; color: var(--stone); margin-top: 0.4rem; cursor: pointer; transition: color 0.2s; }
+    .forgot-link:hover { color: var(--sienna); }
+    .forgot-success { background: #d1fae5; border: 1px solid #a7f3d0; color: #065f46; padding: 0.85rem 1.25rem; font-size: 0.83rem; line-height: 1.55; margin-bottom: 1rem; }
+
+    @media (max-width: 640px) {
+      .nav-inner { padding: 0 0.85rem; gap: 0.5rem; }
+      .logo { font-size: 1.2rem; }
+      .logo-sq { width: 24px; height: 24px; }
+      .nav-right { gap: 0.35rem; }
+      .cart-btn { padding: 0.35rem 0.6rem; }
+      .btn-gold, .btn-ghost { display: none; }
+      .user-chip { gap: 0.45rem; font-size: 0.74rem; }
+      .user-chip button:first-child { max-width: 76px; }
+      .btn-library { font-size: 0.72rem; }
+      .btn-logout { font-size: 0.72rem; }
+      .hero { min-height: auto; }
+      .hero-left { padding: 2.75rem 1rem; }
+      .hero-right { min-height: 300px; padding: 0; }
+      .hero-image-option { background-size: cover; background-position: center; }
+      .hero-ctas { flex-direction: column; align-items: stretch; }
+      .btn-hero-primary, .btn-hero-ghost, .btn-cta-primary, .btn-cta-ghost { width: 100%; text-align: center; }
+      .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1.25rem; }
+      .hstat strong { font-size: 1.7rem; }
+      .sec-head { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .controls { flex-direction: column; }
+      .search-box, .sel { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+      .sel:last-child { border-bottom: none; }
+      .two-col { grid-template-columns: 1fr; }
+      .upload-zone { padding: 1.5rem 1rem; }
+      .subj-header { flex-direction: column; align-items: flex-start; }
+      .comm-compose-footer { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+      .btn-post { width: 100%; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .admin-header { padding: 1.5rem 1rem; }
+      .admin-nav-btn { white-space: nowrap; padding: 0.85rem 1rem; }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root" class="fade-in"></div>
+  <script type="text/babel">
+
+    // ── SUPABASE CLIENT ──────────────────────────────────────────────────
+    const supabase = window.supabase.createClient(
+      "https://kvzdfpttomgnjjstifjc.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt2emRmcHR0b21nbmpqc3RpZmpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3MjQzNzUsImV4cCI6MjA5MzMwMDM3NX0.j9ofsfFyTutqNJKjpLtTrB9BxO1o58PA17m7iVOPUD4",
+      {
+        auth: {
+          persistSession: true,
+          storageKey: "lexnotes-auth",
+          storage: window.localStorage,
+          autoRefreshToken: true,
+          detectSessionInUrl: false,
+          flowType: "implicit"
+        }
+      }
+    );
+
+    const ADMIN_EMAIL = "admin@lexnotes.in";
+    const ADMIN_PASS  = ["Lex", "Admin", "@", "2026"].join("");
+
+    const { useState, useEffect, useRef } = React;
+
+    // ── SUBJECTS ────────────────────────────────────────────────────────
+    const SUBJECTS = [
+      { id:"con",  icon:"§",  name:"Constitutional Law",        desc:"Rights, Federalism & Judicial Review",         ac:"#c8102e" },
+      { id:"con2", icon:"¶",  name:"Contract Law",              desc:"Offer, Acceptance, Breach & Remedies",          ac:"#1a6b3c" },
+      { id:"crim", icon:"†",  name:"Criminal Law",              desc:"Offences, Defences & Procedure",                ac:"#7b2d8b" },
+      { id:"tort", icon:"∂",  name:"Torts",                     desc:"Negligence, Nuisance & Civil Wrongs",           ac:"#c47a00" },
+      { id:"prop", icon:"Ω",  name:"Property Law",              desc:"Ownership, Easements & Transfers",              ac:"#1b4f8a" },
+      { id:"adm",  icon:"Λ",  name:"Administrative Law",        desc:"Tribunals, Writs & Judicial Review",            ac:"#8a1b1b" },
+      { id:"ipc",  icon:"∑",  name:"IPC & CrPC",                desc:"Indian Penal Code & Criminal Procedure",        ac:"#1b6e8a" },
+      { id:"wpt",  icon:"φ",  name:"Western Political Thought", desc:"Plato to Rawls — Theory & Analysis",            ac:"#5a6b1b" },
+      { id:"hist", icon:"Δ",  name:"History",                   desc:"British India & the National Movement",         ac:"#8a1b1b" },
+      { id:"eco",  icon:"μ",  name:"Microeconomics",            desc:"Markets, Cost & Production Theory",             ac:"#2d6a4f" },
+    ];
+
+    const COMM_THREADS = [
+      { id:"general",        label:"General Discussion" },
+      { id:"con",            label:"Constitutional Law"  },
+      { id:"con2",           label:"Contract Law"        },
+      { id:"crim",           label:"Criminal Law"        },
+      { id:"tort",           label:"Torts"               },
+      { id:"ipc",            label:"IPC & CrPC"          },
+      { id:"wpt",            label:"Western Political"   },
+      { id:"notes-quality",  label:"Notes Quality"       },
+      { id:"platform",       label:"Platform Feedback"   },
+    ];
+
+    
+    // ── SEO SUBJECT SLUGS ──────────────────────────────────────────────
+    const SUBJECT_SLUGS = {
+      con:  "constitutional-law-notes",
+      con2: "contract-law-notes",
+      crim: "criminal-law-notes",
+      tort: "torts-law-notes",
+      prop: "property-law-notes",
+      adm:  "administrative-law-notes",
+      ipc:  "ipc-crpc-notes",
+      wpt:  "western-political-thought-notes",
+      hist: "legal-history-notes",
+      eco:  "law-economics-notes"
+    };
+
+
+    // ── HELPERS ─────────────────────────────────────────────────────────
+    function subjectMatch(dbSubject, subjEntry) {
+      if (!dbSubject) return false;
+      const a = dbSubject.toLowerCase();
+      const b = subjEntry.name.toLowerCase();
+      return a.includes(b) || b.includes(a);
+    }
+
+    function timeAgo(ts) {
+      const diff = Date.now() - new Date(ts).getTime();
+      const m = Math.floor(diff/60000);
+      if (m < 1) return "just now";
+      if (m < 60) return `${m}m ago`;
+      const h = Math.floor(m/60);
+      if (h < 24) return `${h}h ago`;
+      return `${Math.floor(h/24)}d ago`;
+    }
+
+    function SkeletonCard() {
+      return (
+        <div className="skeleton-card">
+          <div className="skel" style={{height:"10px",width:"30%",marginBottom:"0.6rem"}}/>
+          <div className="skel" style={{height:"18px",width:"78%",marginBottom:"1rem"}}/>
+          <div className="skel" style={{height:"10px",width:"55%"}}/>
+          <div className="skel" style={{height:"10px",width:"42%"}}/>
+          <div style={{display:"flex",justifyContent:"space-between",marginTop:"1.5rem",paddingTop:"1rem",borderTop:"1px solid var(--border)"}}>
+            <div className="skel" style={{height:"20px",width:"24%",marginBottom:0}}/>
+            <div className="skel" style={{height:"30px",width:"22%",marginBottom:0}}/>
+          </div>
+        </div>
+      );
+    }
+
+
+    function getPreviewSrc(url) {
+      if (!url) return "";
+      const clean = String(url).split("?")[0].toLowerCase();
+      if (clean.endsWith(".docx") || clean.endsWith(".doc")) {
+        return "https://docs.google.com/gview?embedded=1&url=" + encodeURIComponent(url);
+      }
+      return url;
+    }
+
+    async function createPdfPreviewBlob(file, maxPages = 3) {
+      if (!window.PDFLib) throw new Error("PDF preview library did not load.");
+      const sourceBytes = await file.arrayBuffer();
+      const sourcePdf = await window.PDFLib.PDFDocument.load(sourceBytes);
+      const previewPdf = await window.PDFLib.PDFDocument.create();
+      const totalPages = sourcePdf.getPageCount();
+      const pagesToCopy = Array.from({ length: Math.min(maxPages, totalPages) }, (_, i) => i);
+      const copiedPages = await previewPdf.copyPages(sourcePdf, pagesToCopy);
+      copiedPages.forEach(page => previewPdf.addPage(page));
+      const previewBytes = await previewPdf.save();
+      return new Blob([previewBytes], { type: "application/pdf" });
+    }
+
+    function PreviewModal({ preview, onClose }) {
+      if (!preview) return null;
+      return (
+        <div className="preview-modal-overlay" onClick={onClose}>
+          <div className="preview-modal" onClick={e => e.stopPropagation()}>
+            <div className="preview-modal-head">
+              <div className="preview-modal-title">{preview.title || "Document Preview"}</div>
+              <button className="preview-modal-close" onClick={onClose}>Close</button>
+            </div>
+            <iframe className="preview-frame" src={getPreviewSrc(preview.url)} title={preview.title || "Document Preview"} />
+            <div className="preview-fallback">
+              If the preview does not load, <a href={preview.url} target="_blank" rel="noreferrer">open the preview in a new tab</a>.
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ── NOTE CARD ────────────────────────────────────────────────────────
+    function NoteCard({ note, addToCart, purchases = [], openPreview }) {
+      const purchased = purchases.find(p => p.note_id === note.id);
+      return (
+        <div className="ncard">
+          <div className="nsubj">{note.subject || "General"}</div>
+          <h3 className="ntitle">{note.title}</h3>
+          <div className="nmeta">
+            {note.profiles?.full_name && <div>{note.profiles.full_name}</div>}
+            {note.profiles?.college   && <div>{note.profiles.college}</div>}
+          </div>
+          <div className="ndetails">
+            {note.pages && <span>{note.pages} pages</span>}
+            {note.preview_url && <button type="button" className="preview-link" onClick={() => openPreview?.(note.preview_url, note.title)}>Preview</button>}
+            {note.file_url && (
+              purchased
+                ? <a href={note.file_url} target="_blank" rel="noreferrer" style={{color:"var(--success)",fontWeight:600,fontSize:"0.76rem",textDecoration:"underline",marginLeft:"0.75rem"}}>View File</a>
+                : <span style={{color:"var(--stone)",fontSize:"0.76rem",marginLeft:"0.75rem"}}>Purchase to unlock</span>
+            )}
+          </div>
+          <div className="nfooter">
+            <span className="nprice">₹{note.price}</span>
+            <button className="btn-cart" onClick={() => addToCart(note)}>Add to Cart</button>
+          </div>
+        </div>
+      );
+    }
+
+    // ── TOAST ────────────────────────────────────────────────────────────
+    function Toast({ msg, type }) {
+      const bg = { success:"var(--success)", error:"var(--danger)", info:"var(--charcoal)" };
+      return <div className="toast" style={{background:bg[type]||bg.success}}>{msg}</div>;
+    }
+
+    // ── NAVBAR ───────────────────────────────────────────────────────────
+    function Navbar({ page, go, cart, setCartOpen, user, logout, isAdmin }) {
+      const [mob, setMob] = useState(false);
+      return (
+        <nav className="navbar">
+          <div className="nav-inner">
+            <div className="logo" onClick={() => { go("home"); setMob(false); }}>
+              <span className="logo-sq">⚖</span>LexNotes
+            </div>
+            <div className={`nav-links ${mob?"open":""}`} style={mob?{display:"flex",position:"fixed",top:"62px",left:0,right:0,background:"var(--white)",flexDirection:"column",padding:"1rem",zIndex:150,borderBottom:"1px solid var(--border)"}:{}}>
+              <button className={`nav-btn ${page==="browse"?"active":""}`}    onClick={() => { go("browse");    setMob(false); }}>Browse</button>
+              <button className={`nav-btn ${page==="sell"?"active":""}`}      onClick={() => { go("sell");      setMob(false); }}>Sell Notes</button>
+              <button className={`nav-btn ${page==="sellers"?"active":""}`}   onClick={() => { go("sellers");   setMob(false); }}>Sellers</button>
+              <button className={`nav-btn ${page==="community"?"active":""}`} onClick={() => { go("community"); setMob(false); }}>Community</button>
+              {isAdmin && <button className={`nav-btn ${page==="admin"?"active":""}`} onClick={() => { go("admin"); setMob(false); }} style={{color:"var(--sienna)"}}>Admin</button>}
+            </div>
+            <div className="nav-right">
+              <button className="cart-btn" onClick={() => setCartOpen(v => !v)}>
+                Cart {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
+              </button>
+              {user ? (
+                <div className="user-chip">
+                  <button onClick={() => go("profile")} style={{color:"var(--ink)",fontWeight:600}}>{user.split("@")[0]}</button>
+                  <button className="btn-library" onClick={() => go("library")}>Library</button>
+                  <button className="btn-logout" onClick={logout}>Sign out</button>
+                </div>
+              ) : (
+                <div style={{display:"flex",gap:"0.5rem",alignItems:"center"}}>
+                  <button className="btn-ghost" onClick={() => go("login")}>Sign In</button>
+                  <button className="btn-gold"  onClick={() => go("register")}>Join</button>
+                </div>
+              )}
+              <button className="hamburger" onClick={() => setMob(v => !v)}>&#9776;</button>
+            </div>
+          </div>
+        </nav>
+      );
+    }
+
+    // ── HOME ─────────────────────────────────────────────────────────────
+    function Home({ go, addToCart, notes, notesLoading, notesError, purchases, openPreview }) {
+      return (
+        <>
+          {/* HERO */}
+          <section className="hero">
+            <div className="hero-left">
+              <div className="hero-eyebrow">Trusted by 12,000+ Law Students across India</div>
+              <h1 className="hero-h1">Notes that get you<br/><em>through finals.</em></h1>
+              <p className="hero-sub">Curated study material from top-ranked law colleges across India. Buy, sell, and ace your exams.</p>
+              <div className="hero-ctas">
+                <button className="btn-hero-primary" onClick={() => go("browse")}>Browse All Notes</button>
+                <button className="btn-hero-ghost"   onClick={() => go("sell")}>Start Selling</button>
+              </div>
+              <div className="hero-stats">
+                <div className="hstat"><strong>4,800+</strong><span>Note Sets</span></div>
+                <div className="hstat"><strong>320+</strong><span>Sellers</span></div>
+                <div className="hstat"><strong>12k+</strong><span>Students</span></div>
+                <div className="hstat"><strong>4.8</strong><span>Avg Rating</span></div>
+              </div>
+            </div>
+<div className="hero-right hero-image-option"></div>
+            </section>
+
+          {/* SUBJECTS */}
+          <div className="section">
+            <div className="sec-eyebrow">Explore by Area</div>
+            <div className="sec-head">
+              <h2 className="sec-title">Browse by <em>Subject</em></h2>
+              <button className="sec-link" onClick={() => go("browse")}>View all subjects</button>
+            </div>
+            <div className="subjects-grid">
+              {SUBJECTS.map(s => (
+                <div key={s.id} className="scard" onClick={() => go("subject",{subject:s})}>
+                  <div className="scard-icon" style={{fontFamily:"'Cormorant Garamond',serif",fontWeight:700,fontSize:"1.6rem",color:"var(--sienna)"}}>{s.icon}</div>
+                  <div className="scard-name">{s.name}</div>
+                  <div className="scard-desc">{s.desc}</div>
+                  <div className="scard-count">{notes.filter(n => n.is_approved !== false && !n.is_deleted && subjectMatch(n.subject, s)).length} notes</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* FEATURED NOTES */}
+          <div className="section-dark">
+            <div className="section">
+              <div className="sec-eyebrow" style={{color:"rgba(255,255,255,0.3)"}}>Recently Added</div>
+              <div className="sec-head">
+                <h2 className="sec-title light">Featured <em style={{color:"var(--sienna2)"}}>Notes</em></h2>
+                <button className="sec-link light" onClick={() => go("browse")}>View all</button>
+              </div>
+              {notesError && <div className="error-banner">Could not load notes: {notesError}</div>}
+              {notesLoading
+                ? <div className="notes-grid">{[1,2,3].map(i => <SkeletonCard key={i}/>)}</div>
+                : notes.filter(n => n.is_approved !== false && !n.is_deleted).length === 0 && !notesError
+                  ? <div className="empty" style={{color:"rgba(255,255,255,0.3)"}}>No notes yet — add rows from the Supabase Table Editor.</div>
+                  : <div className="notes-grid">{notes.filter(n => n.is_approved !== false && !n.is_deleted).slice(0,6).map(n => <NoteCard key={n.id} note={n} addToCart={addToCart} purchases={purchases} openPreview={openPreview}/>)}</div>
+              }
+            </div>
+          </div>
+
+          {/* HOW IT WORKS */}
+          <div className="section">
+            <div className="sec-eyebrow">The Process</div>
+            <h2 className="sec-title" style={{marginBottom:"0.5rem"}}>How LexNotes <em>Works</em></h2>
+            <div className="divider"/>
+            <div className="steps">
+              {[
+                {n:"01",t:"Browse & Filter",   d:"Search 30+ subjects. Filter by college, semester, or price."},
+                {n:"02",t:"Preview & Buy",      d:"Check ratings, read samples, pay securely via UPI or card."},
+                {n:"03",t:"Download Instantly", d:"Get your PDF immediately after payment. Print or read anywhere."},
+                {n:"04",t:"Sell & Earn",        d:"Upload notes, set your price, earn 80% of every sale — paid weekly."},
+              ].map(s => (
+                <div key={s.n} className="step-card">
+                  <div className="step-n">{s.n}</div>
+                  <div className="step-t">{s.t}</div>
+                  <div className="step-d">{s.d}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* TESTIMONIALS */}
+          <div className="section" style={{paddingTop:0}}>
+            <div className="sec-eyebrow">From Our Students</div>
+            <h2 className="sec-title" style={{marginBottom:"0.5rem"}}>What They're <em>Saying</em></h2>
+            <div className="divider"/>
+            <div className="testi-grid">
+              {[
+                {q:"\u201c",body:"The Constitutional Law notes saved my semester. Concise, well-structured, and actually exam-relevant.",name:"Anika R.",college:"NLU Delhi, 3rd Year"},
+                {q:"\u201c",body:"I uploaded my Contract notes and made ₹4,800 in the first month. The platform is incredibly straightforward.",name:"Rajan M.",college:"NMIMS Mumbai, 2nd Year"},
+                {q:"\u201c",body:"The IPC notes are a goldmine. Case citations, section summaries, and mnemonics — all in one place.",name:"Priya S.",college:"Symbiosis Law School, 4th Year"},
+              ].map((t,i) => (
+                <div key={i} className="testi-card">
+                  <div className="testi-quote">{t.q}</div>
+                  <p className="testi-body">{t.body}</p>
+                  <div className="testi-author"><strong>{t.name}</strong>{t.college}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="cta-strip">
+            <div className="cta-eyebrow">Join the Community</div>
+            <h2 className="cta-h2">Ready to sell<br/>your <em>notes?</em></h2>
+            <p className="cta-sub">Join 320+ student sellers already earning on LexNotes.<br/>Our sellers average ₹4,200 per month.</p>
+            <div className="cta-btns">
+              <button className="btn-cta-primary" onClick={() => go("sell")}>Upload Your First Set</button>
+              <button className="btn-cta-ghost"   onClick={() => go("browse")}>Browse Notes</button>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    // ── BROWSE ───────────────────────────────────────────────────────────
+    function Browse({ go, addToCart, notes, notesLoading, notesError, purchases, openPreview }) {
+      const [q,    setQ]    = useState("");
+      const [subj, setSubj] = useState("all");
+      const [sort, setSort] = useState("default");
+
+      const shown = notes
+        .filter(n => n.is_approved !== false && !n.is_deleted)
+        .filter(n => {
+          if (subj === "all") return true;
+          const entry = SUBJECTS.find(s => s.id === subj);
+          return entry ? subjectMatch(n.subject, entry) : true;
+        })
+        .filter(n =>
+          (n.title||"").toLowerCase().includes(q.toLowerCase()) ||
+          (n.subject||"").toLowerCase().includes(q.toLowerCase())
+        )
+        .sort((a,b) =>
+          sort === "price-lo" ? a.price - b.price :
+          sort === "price-hi" ? b.price - a.price : 0
+        );
+
+      return (
+        <>
+          <div className="page-hero">
+            <div className="page-hero-inner">
+              <h1 className="page-h1">Browse Notes</h1>
+              <p className="page-sub-text">{notesLoading ? "Loading…" : `${notes.length} note${notes.length!==1?"s":""} available`}</p>
+            </div>
+          </div>
+          <div className="page-wrap">
+            {notesError && <div className="error-banner">{notesError}</div>}
+            <div className="controls">
+              <input className="search-box" placeholder="Search subjects, topics…" value={q} onChange={e => setQ(e.target.value)}/>
+              <select className="sel" value={subj} onChange={e => setSubj(e.target.value)}>
+                <option value="all">All Subjects</option>
+                {SUBJECTS.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+              </select>
+              <select className="sel" value={sort} onChange={e => setSort(e.target.value)}>
+                <option value="default">Default Order</option>
+                <option value="price-lo">Price: Low to High</option>
+                <option value="price-hi">Price: High to Low</option>
+              </select>
+            </div>
+            <div className="pills">
+              {SUBJECTS.map(s => (
+                <button key={s.id} className={`pill ${subj===s.id?"on":""}`} onClick={() => setSubj(subj===s.id?"all":s.id)}>
+                  {s.name}
+                </button>
+              ))}
+            </div>
+            {notesLoading
+              ? <div className="notes-grid">{[1,2,3,4].map(i => <SkeletonCard key={i}/>)}</div>
+              : shown.length === 0
+                ? <div className="empty">No notes found. Try a different search or filter.</div>
+                : <div className="notes-grid">{shown.map(n => <NoteCard key={n.id} note={n} addToCart={addToCart} purchases={purchases} openPreview={openPreview}/>)}</div>
+            }
+          </div>
+        </>
+      );
+    }
+
+    // ── SUBJECT PAGE ─────────────────────────────────────────────────────
+    function SubjectPage({ subject, go, addToCart, notes, notesLoading, purchases, openPreview }) {
+      if (!subject) { go("browse"); return null; }
+      const filtered = notes.filter(n => n.is_approved !== false && !n.is_deleted && subjectMatch(n.subject, subject));
+      return (
+        <div className="page-wrap">
+          <button className="back-btn" onClick={() => go("browse")}>← Back to Browse</button>
+          <div className="subj-header">
+            <span className="subj-icon" style={{fontFamily:"'Cormorant Garamond',serif",fontWeight:700,color:"var(--sienna)",fontSize:"2rem"}}>{subject.icon}</span>
+            <div>
+              <h1 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"2rem",fontWeight:600,color:"var(--ink)",marginBottom:"0.3rem"}}>{subject.name}</h1>
+              <p style={{color:"var(--stone)",fontSize:"0.9rem"}}>{subject.desc}</p>
+            </div>
+          </div>
+          {notesLoading
+            ? <div className="notes-grid">{[1,2,3].map(i => <SkeletonCard key={i}/>)}</div>
+            : filtered.length > 0
+              ? <div className="notes-grid">{filtered.map(n => <NoteCard key={n.id} note={n} addToCart={addToCart} purchases={purchases} openPreview={openPreview}/>)}</div>
+              : <div className="empty">No notes for this subject yet — be the first to upload.</div>
+          }
+        </div>
+      );
+    }
+
+    // ── SELL ─────────────────────────────────────────────────────────────
+    function Sell({ user, go, showToast }) {
+      const [f, setF]             = useState({title:"",subject:"",price:"",pages:""});
+      const [done, setDone]       = useState(false);
+      const [saving, setSaving]   = useState(false);
+      const [uploading, setUploading]       = useState(false);
+      const [uploadedUrl, setUploadedUrl]   = useState(null);
+      const [uploadedName, setUploadedName] = useState(null);
+      const [previewUrl, setPreviewUrl]     = useState(null);
+      const [previewName, setPreviewName]   = useState(null);
+      const [previewUploading, setPreviewUploading] = useState(false);
+      const set = e => setF(p => ({...p,[e.target.name]:e.target.value}));
+
+      if (!user) return (
+        <div className="page-wrap center-page">
+          <div className="locked-box">
+            <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"3rem",color:"var(--sienna)"}}>⚖</div>
+            <h2>Sign In to Sell Notes</h2>
+            <div style={{width:"30px",height:"1px",background:"var(--sienna)",margin:"0.75rem auto 1.25rem"}}/>
+            <p>Create a free account to start earning from your study materials.</p>
+            <div style={{display:"flex",gap:"1rem",justifyContent:"center",flexWrap:"wrap"}}>
+              <button className="btn-cta-primary" style={{background:"var(--ink)",color:"white"}} onClick={() => go("register")}>Create Account</button>
+              <button className="btn-hero-ghost" onClick={() => go("login")}>Sign In</button>
+            </div>
+          </div>
+        </div>
+      );
+
+      if (done) return (
+        <div className="page-wrap center-page">
+          <div className="locked-box">
+            <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"3rem",color:"var(--success)"}}>✓</div>
+            <h2>Notes Submitted</h2>
+            <div style={{width:"30px",height:"1px",background:"var(--sienna)",margin:"0.75rem auto 1.25rem"}}/>
+            <p>Your notes have been submitted for admin review.</p>
+            <button className="btn-full" style={{maxWidth:"240px",margin:"0 auto"}} onClick={() => { setDone(false); setF({title:"",subject:"",price:"",pages:""}); setUploadedUrl(null); setUploadedName(null); setPreviewUrl(null); setPreviewName(null); }}>Submit Another Set</button>
+          </div>
+        </div>
+      );
+
+      const handleUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const allowed = ["application/pdf","application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+        if (!allowed.includes(file.type)) { showToast("Only PDF or DOCX files allowed.", "error"); return; }
+        if (file.size > 20 * 1024 * 1024) { showToast("File too large — max 20MB.", "error"); return; }
+        setUploading(true);
+        const safeName = file.name.replace(/\s+/g,"-");
+        const fileName = `${Date.now()}-${safeName}`;
+        const { data, error } = await supabase.storage.from("notes-full").upload(fileName, file);
+        if (error) { setUploading(false); showToast("Upload failed: " + error.message, "error"); return; }
+        const { data: urlData } = supabase.storage.from("notes-full").getPublicUrl(data.path);
+        setUploadedUrl(urlData.publicUrl);
+        setUploadedName(file.name);
+
+        if (file.type === "application/pdf") {
+          try {
+            setPreviewUploading(true);
+            const previewBlob = await createPdfPreviewBlob(file, 3);
+            const previewFileName = `${Date.now()}-auto-preview-${safeName.replace(/\.pdf$/i, "")}.pdf`;
+            const { data: previewData, error: previewError } = await supabase.storage.from("notes-preview").upload(previewFileName, previewBlob, { contentType: "application/pdf" });
+            if (previewError) throw previewError;
+            const { data: previewUrlData } = supabase.storage.from("notes-preview").getPublicUrl(previewData.path);
+            setPreviewUrl(previewUrlData.publicUrl);
+            setPreviewName(`Auto preview · first ${Math.min(3, await window.PDFLib.PDFDocument.load(await file.arrayBuffer()).then(pdf => pdf.getPageCount()))} page(s)`);
+            showToast("File uploaded and preview created automatically.");
+          } catch (previewError) {
+            console.error("Auto preview failed", previewError);
+            showToast("File uploaded. Auto-preview failed, so upload a preview manually.", "error");
+          } finally {
+            setPreviewUploading(false);
+            setUploading(false);
+          }
+        } else {
+          setUploading(false);
+          showToast("DOCX uploaded. Please upload a short preview file manually.");
+        }
+      };
+
+      const handlePreviewUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const allowed = ["application/pdf","application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+        if (!allowed.includes(file.type)) { showToast("Only PDF or DOCX preview files allowed.", "error"); return; }
+        if (file.size > 8 * 1024 * 1024) { showToast("Preview file too large — max 8MB.", "error"); return; }
+        setPreviewUploading(true);
+        const fileName = `${Date.now()}-preview-${file.name.replace(/\s+/g,"-")}`;
+        const { data, error } = await supabase.storage.from("notes-preview").upload(fileName, file);
+        setPreviewUploading(false);
+        if (error) { showToast("Preview upload failed: " + error.message, "error"); return; }
+        const { data: urlData } = supabase.storage.from("notes-preview").getPublicUrl(data.path);
+        setPreviewUrl(urlData.publicUrl);
+        setPreviewName(file.name);
+        showToast("Preview uploaded successfully.");
+      };
+
+      const submit = async () => {
+        if (!f.title || !f.subject || !f.price) { showToast("Please fill all required fields.", "error"); return; }
+        setSaving(true);
+        const { data: { user: u } } = await supabase.auth.getUser();
+        const { error } = await supabase.from("notes").insert([{
+          title:     f.title,
+          subject:   f.subject,
+          price:     parseInt(f.price),
+          pages:     f.pages ? parseInt(f.pages) : null,
+          file_url:  uploadedUrl || null,
+          preview_url: previewUrl || null,
+          is_approved: false,
+          seller_id: u?.id || null,
+        }]);
+        setSaving(false);
+        if (error) { showToast("Save failed: " + error.message, "error"); return; }
+        showToast("Notes submitted successfully.");
+        setDone(true);
+      };
+
+      return (
+        <>
+          <div className="page-hero">
+            <div className="page-hero-inner">
+              <h1 className="page-h1">Sell Your Notes</h1>
+              <p className="page-sub-text">Upload quality notes for review. Approved material can be listed for students to discover.</p>
+            </div>
+          </div>
+          <div className="page-wrap">
+            <div className="sell-grid">
+              <div className="form-card">
+                <div className="form-sec-title">Note Details</div>
+                <label className="flabel">Title <span className="req">*</span></label>
+                <input className="finput" name="title" placeholder="e.g. Complete Constitutional Law Notes" value={f.title} onChange={set}/>
+                <label className="flabel">Subject <span className="req">*</span></label>
+                <select className="finput" name="subject" value={f.subject} onChange={set}>
+                  <option value="">Select subject</option>
+                  {SUBJECTS.map(s => <option key={s.id} value={s.name}>{s.name}</option>)}
+                </select>
+                <div className="two-col">
+                  <div>
+                    <label className="flabel">Price (₹) <span className="req">*</span></label>
+                    <input className="finput" name="price" type="number" placeholder="199" value={f.price} onChange={set}/>
+                  </div>
+                  <div>
+                    <label className="flabel">Pages</label>
+                    <input className="finput" name="pages" type="number" placeholder="48" value={f.pages} onChange={set}/>
+                  </div>
+                </div>
+                <label className="flabel">Upload PDF or DOCX</label>
+                <div className="upload-zone" onClick={() => document.getElementById("file-input").click()}>
+                  {uploading ? "Uploading…" : uploadedName ? <span style={{color:"var(--success)"}}>Uploaded: {uploadedName}</span> : "Click to select file (PDF or DOCX, max 20MB)"}
+                </div>
+                <input id="file-input" type="file" accept=".pdf,.docx" style={{display:"none"}} onChange={handleUpload}/>
+                <label className="flabel">Upload Preview File <span style={{fontWeight:400,textTransform:"none",letterSpacing:0}}>(first 2–3 pages)</span></label>
+                <div className="upload-zone" onClick={() => document.getElementById("preview-input").click()}>
+                  {previewUploading ? "Uploading preview…" : previewName ? <span style={{color:"var(--success)"}}>Preview uploaded: {previewName}</span> : "Click to select preview file (PDF or DOCX, max 8MB)"}
+                </div>
+                <input id="preview-input" type="file" accept=".pdf,.docx" style={{display:"none"}} onChange={handlePreviewUpload}/>
+                <button className="btn-full" onClick={submit} disabled={saving}>{saving?"Saving…":"Submit for Review"}</button>
+              </div>
+              <div>
+                <div className="sidebar-card">
+                  <div className="sidebar-h">Earning Structure</div>
+                  <div className="earn-row"><span>Your Share</span><strong>80%</strong></div>
+                  <div className="earn-row"><span>Platform Fee</span><strong>20%</strong></div>
+                  <div className="earn-row hl"><span>On ₹299 note</span><strong>You earn ₹239</strong></div>
+                </div>
+                <div className="sidebar-card">
+                  <div className="sidebar-h">Seller Guidelines</div>
+                  <ul className="guide-ul">
+                    <li>PDF or DOCX format, min. 10 pages</li>
+                    <li>Clear handwriting or typed notes</li>
+                    <li>Include subject & semester info</li>
+                    <li>No copied textbook content</li>
+                    <li>Review takes 24–48 hours</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    // ── AUTH ─────────────────────────────────────────────────────────────
+    function Auth({ mode, setUser, go, showToast }) {
+      const [f, setF]               = useState({name:"",email:"",password:"",college:""});
+      const [loading, setLoading]   = useState(false);
+      const [forgotMode, setForgot] = useState(false);
+      const [forgotEmail, setForgotEmail] = useState("");
+      const [forgotSent, setForgotSent]   = useState(false);
+      const [forgotLoading, setFL]        = useState(false);
+      const set = e => setF(p => ({...p,[e.target.name]:e.target.value}));
+
+      const submit = async () => {
+        if (!f.email || !f.password) { showToast("Please fill all fields.", "error"); return; }
+        setLoading(true);
+        if (mode === "register") {
+          const { error } = await supabase.auth.signUp({ email: f.email, password: f.password });
+          setLoading(false);
+          if (error) { showToast(error.message, "error"); return; }
+          showToast("Account created. Check your email to confirm, then sign in.");
+          go("login");
+        } else {
+          const { data, error } = await supabase.auth.signInWithPassword({ email: f.email, password: f.password });
+          setLoading(false);
+          if (error) { showToast(error.message, "error"); return; }
+          setUser(data.user.email);
+          showToast("Welcome back.");
+          go("home");
+        }
+      };
+
+      const sendReset = async () => {
+        if (!forgotEmail) { showToast("Please enter your email address.", "error"); return; }
+        setFL(true);
+        const { error } = await supabase.auth.resetPasswordForEmail(forgotEmail, {
+          redirectTo: window.location.origin + "/?reset=true"
+        });
+        setFL(false);
+        if (error) { showToast(error.message, "error"); return; }
+        setForgotSent(true);
+      };
+
+      if (forgotMode) {
+        return (
+          <div className="auth-page">
+            <div className="auth-card">
+              <div className="auth-logo"><span className="auth-logo-sq">⚖</span>LexNotes</div>
+              <h2 className="auth-h">Reset Password</h2>
+              <div className="auth-divider"/>
+              {forgotSent ? (
+                <>
+                  <div className="forgot-success">
+                    Reset link sent. Check your inbox — the link expires in 1 hour. Check your spam folder if you don't see it.
+                  </div>
+                  <button className="btn-full" style={{marginTop:"0.5rem"}} onClick={() => { setForgot(false); setForgotSent(false); setForgotEmail(""); }}>
+                    Back to Sign In
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="auth-sub">Enter your registered email and we'll send you a reset link.</p>
+                  <label className="flabel">Email Address <span className="req">*</span></label>
+                  <input className="finput" type="email" placeholder="you@law.edu" value={forgotEmail} onChange={e => setForgotEmail(e.target.value)} onKeyDown={e => e.key==="Enter" && sendReset()}/>
+                  <button className="btn-full" style={{marginTop:"1.75rem"}} onClick={sendReset} disabled={forgotLoading}>
+                    {forgotLoading ? "Sending…" : "Send Reset Link"}
+                  </button>
+                  <p className="auth-switch">
+                    <button className="link-btn" onClick={() => setForgot(false)}>← Back to Sign In</button>
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div className="auth-page">
+          <div className="auth-card">
+            <div className="auth-logo"><span className="auth-logo-sq">⚖</span>LexNotes</div>
+            <h2 className="auth-h">{mode==="login"?"Welcome Back":"Create Account"}</h2>
+            <div className="auth-divider"/>
+            <p className="auth-sub">{mode==="login"?"Sign in to access your notes and cart.":"Join 12,000+ law students on LexNotes."}</p>
+            {mode==="register" && <>
+              <label className="flabel">Full Name</label>
+              <input className="finput" name="name" placeholder="e.g. Sahil Mehta" value={f.name} onChange={set}/>
+              <label className="flabel">College</label>
+              <input className="finput" name="college" placeholder="e.g. NMIMS Mumbai" value={f.college} onChange={set}/>
+            </>}
+            <label className="flabel">Email</label>
+            <input className="finput" name="email" type="email" placeholder="you@law.edu" value={f.email} onChange={set}/>
+            <label className="flabel">Password</label>
+            <input className="finput" name="password" type="password" placeholder="••••••••" value={f.password} onChange={set} onKeyDown={e => e.key==="Enter" && submit()}/>
+            {mode==="login" && (
+              <button className="forgot-link" onClick={() => setForgot(true)}>Forgot password?</button>
+            )}
+            <button className="btn-full" style={{marginTop:"1.75rem"}} onClick={submit} disabled={loading}>
+              {loading?"Please wait…":mode==="login"?"Sign In":"Create Account"}
+            </button>
+            <p className="auth-switch">
+              {mode==="login"
+                ? <>No account? <button className="link-btn" onClick={() => go("register")}>Sign Up</button></>
+                : <>Already registered? <button className="link-btn" onClick={() => go("login")}>Sign In</button></>}
+            </p>
+          </div>
+        </div>
+      );
+    }
+
+    // ── CART DRAWER ──────────────────────────────────────────────────────
+    function CartDrawer({ cart, remove, close, go, onCheckout }) {
+      const total = cart.reduce((s,c) => s + Number(c.price), 0);
+      return (
+        <div className="overlay" onClick={close}>
+          <div className="drawer" onClick={e => e.stopPropagation()}>
+            <div className="drawer-head">
+              <h3>Cart ({cart.length})</h3>
+              <button className="close-x" onClick={close}>&#x2715;</button>
+            </div>
+            {cart.length === 0 ? (
+              <div className="cart-empty">
+                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"2.5rem",color:"var(--border2)"}}>&#8709;</div>
+                <p>Your cart is empty.</p>
+                <button className="link-btn" onClick={() => { close(); go("browse"); }}>Browse notes</button>
+              </div>
+            ) : (
+              <>
+                <div className="drawer-body">
+                  {cart.map(c => (
+                    <div key={c.id} className="cart-item">
+                      <div>
+                        <strong>{(c.title||"").length>42?c.title.slice(0,42)+"…":c.title}</strong>
+                        <small>{c.subject}</small>
+                      </div>
+                      <div style={{display:"flex",alignItems:"center",gap:"0.75rem",flexShrink:0}}>
+                        <span style={{fontFamily:"'Cormorant Garamond',serif",fontWeight:600,color:"var(--ink)"}}>₹{c.price}</span>
+                        <button className="remove-x" onClick={() => remove(c.id)}>&#x2715;</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="drawer-foot">
+                  <div className="cart-total">
+                    <span>Total ({cart.length} items)</span>
+                    <strong>₹{total}</strong>
+                  </div>
+                  <button className="btn-full" style={{marginTop:0}} onClick={onCheckout}>
+                    Checkout — ₹{total}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      );
+    }
+
+    // ── SELLER DASHBOARD ─────────────────────────────────────────────────
+    function SellerDashboard({ myNotes, purchases, go, profile }) {
+      const [deletingId, setDeletingId] = useState(null);
+      const [notes, setNotes]           = useState(myNotes);
+      useEffect(() => { setNotes(myNotes); }, [myNotes]);
+
+      const salesByNote = {};
+      purchases.forEach(p => {
+        if (!salesByNote[p.note_id]) salesByNote[p.note_id] = { count: 0, revenue: 0 };
+        salesByNote[p.note_id].count++;
+        salesByNote[p.note_id].revenue += Number(p.amount);
+      });
+      const myNoteIds = new Set(notes.map(n => n.id));
+      const totalSales    = Object.entries(salesByNote).filter(([id]) => myNoteIds.has(id)).reduce((s,[,v]) => s + v.count, 0);
+      const totalRevenue  = Object.entries(salesByNote).filter(([id]) => myNoteIds.has(id)).reduce((s,[,v]) => s + v.revenue, 0);
+      const totalEarnings = Math.floor(totalRevenue * 0.8);
+
+      const deleteNote = async (noteId) => {
+        if (!window.confirm("Unlist this note from public pages? Existing buyers keep access.")) return;
+        setDeletingId(noteId);
+        const { error } = await supabase.from("notes").update({ is_deleted:true, is_approved:false }).eq("id", noteId);
+        setDeletingId(null);
+        if (error) { alert("Delete failed: " + error.message); return; }
+        setNotes(prev => prev.filter(n => n.id !== noteId));
+      };
+
+      return (
+        <div>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(180px,1fr))",gap:"1px",marginBottom:"2rem",background:"var(--border)",border:"1px solid var(--border)"}}>
+            {[
+              { label:"Notes Uploaded", value: notes.length },
+              { label:"Total Sales",    value: totalSales },
+              { label:"Total Earnings", value: `₹${totalEarnings}` },
+              { label:"Avg per Note",   value: notes.length > 0 ? `₹${Math.floor(totalEarnings/notes.length)}` : "₹0" },
+            ].map(s => (
+              <div key={s.label} className="admin-stat">
+                <div className="admin-stat-val">{s.value}</div>
+                <div className="admin-stat-label">{s.label}</div>
+              </div>
+            ))}
+          </div>
+          <div className="admin-table-wrap">
+            <div className="admin-table-head">
+              <h3>Your Notes</h3>
+              <button className="btn-gold" onClick={() => go("sell")}>Upload New</button>
+            </div>
+            {notes.length === 0 ? (
+              <div className="empty">No notes yet.</div>
+            ) : (
+              <div style={{overflowX:"auto"}}>
+                <table className="admin-table">
+                  <thead>
+                    <tr>{["Title","Subject","Price","Sales","Your Earnings","Action"].map(h => <th key={h}>{h}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {notes.map(n => {
+                      const sale = salesByNote[n.id] || { count:0, revenue:0 };
+                      const earned = Math.floor(sale.revenue * 0.8);
+                      return (
+                        <tr key={n.id}>
+                          <td style={{fontWeight:600,color:"var(--ink)",maxWidth:"200px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{n.title}</td>
+                          <td style={{color:"var(--stone)"}}>{n.subject}</td>
+                          <td>₹{n.price}</td>
+                          <td>{sale.count}</td>
+                          <td style={{color:earned>0?"var(--success)":"var(--stone)"}}>₹{earned}</td>
+                          <td>
+                            <button className="admin-action-btn danger" onClick={() => deleteNote(n.id)} disabled={deletingId===n.id}>
+                              {deletingId===n.id?"Unlisting…":"Unlist"}
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                  <tfoot>
+                    <tr style={{borderTop:"2px solid var(--border)",background:"var(--parchment)"}}>
+                      <td colSpan="4" style={{padding:"0.85rem 1rem",fontWeight:700,color:"var(--ink)"}}>Total Earnings (80% of ₹{totalRevenue})</td>
+                      <td style={{padding:"0.85rem 1rem",fontWeight:700,color:"var(--success)"}}>₹{totalEarnings}</td>
+                      <td/>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            )}
+          </div>
+          <div style={{background:"var(--charcoal)",padding:"1.5rem 2rem",display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"1rem"}}>
+            <div>
+              <div style={{color:"white",fontWeight:600,fontSize:"1rem",marginBottom:"0.25rem"}}>Ready to earn more?</div>
+              <div style={{color:"rgba(255,255,255,0.4)",fontSize:"0.84rem"}}>Upload more notes and grow your earnings.</div>
+            </div>
+            <button className="btn-gold" onClick={() => go("sell")}>Upload Notes</button>
+          </div>
+        </div>
+      );
+    }
+
+    // ── PROFILE ──────────────────────────────────────────────────────────
+    function Profile({ go, addToCart, notes, notesLoading, purchases, openPreview }) {
+      const [profile, setProfile]           = useState(null);
+      const [editing, setEditing]           = useState(false);
+      const [activeTab, setActiveTab]       = useState("profile");
+      const [f, setF]                       = useState({full_name:"",college:"",bio:"",year:"",programme:""});
+      const [saving, setSaving]             = useState(false);
+      const [avatarUploading, setAvatarUploading] = useState(false);
+
+      useEffect(() => {
+        const load = async () => {
+          const { data: { user } } = await supabase.auth.getUser();
+          if (!user) return;
+          const { data } = await supabase.from("profiles").select("*").eq("id", user.id).single();
+          setProfile(data);
+          setF({ full_name: data?.full_name||"", college: data?.college||"", bio: data?.bio||"", year: data?.year||"", programme: data?.programme||"" });
+        };
+        load();
+      }, []);
+
+      const save = async () => {
+        setSaving(true);
+        const { data: { user } } = await supabase.auth.getUser();
+        await supabase.from("profiles").update({ full_name: f.full_name, college: f.college, bio: f.bio, year: f.year, programme: f.programme }).eq("id", user.id);
+        setProfile(p => ({...p,...f}));
+        setSaving(false);
+        setEditing(false);
+      };
+
+      const uploadAvatar = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        setAvatarUploading(true);
+        const { data: { user } } = await supabase.auth.getUser();
+        const { data, error } = await supabase.storage.from("avatars").upload(`${user.id}-avatar`, file, { upsert: true });
+        if (error) { setAvatarUploading(false); return; }
+        const { data: urlData } = supabase.storage.from("avatars").getPublicUrl(data.path);
+        await supabase.from("profiles").update({ avatar_url: urlData.publicUrl }).eq("id", user.id);
+        setProfile(p => ({...p, avatar_url: urlData.publicUrl}));
+        setAvatarUploading(false);
+      };
+
+      const myNotes = notes.filter(n => n.seller_id === profile?.id);
+      if (!profile) return <div className="center-page"><div className="empty">Loading profile…</div></div>;
+
+      return (
+        <div className="page-wrap">
+          <div className="tab-bar">
+            <button className={`tab-btn ${activeTab==="profile"?"active-tab":""}`} onClick={() => setActiveTab("profile")}>My Profile</button>
+            {myNotes.length > 0 && (
+              <button className={`tab-btn gold-tab ${activeTab==="dashboard"?"active-tab":""}`} onClick={() => setActiveTab("dashboard")}>Seller Dashboard</button>
+            )}
+          </div>
+
+          {activeTab === "profile" && (
+            <>
+              <div style={{background:"var(--white)",border:"1px solid var(--border)",padding:"2rem",marginBottom:"2rem",display:"flex",gap:"2rem",alignItems:"flex-start",flexWrap:"wrap"}}>
+                <div style={{textAlign:"center"}}>
+                  <div style={{width:"96px",height:"96px",borderRadius:"50%",overflow:"hidden",background:"var(--parchment)",margin:"0 auto 0.75rem",border:"1px solid var(--border2)"}}>
+                    {profile.avatar_url
+                      ? <img src={profile.avatar_url} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+                      : <div style={{width:"100%",height:"100%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Cormorant Garamond',serif",fontSize:"2.5rem",color:"var(--stone)"}}>A</div>
+                    }
+                  </div>
+                  <label style={{cursor:"pointer",color:"var(--sienna)",fontSize:"0.78rem",textDecoration:"underline"}}>
+                    {avatarUploading?"Uploading…":"Change photo"}
+                    <input type="file" accept="image/*" style={{display:"none"}} onChange={uploadAvatar}/>
+                  </label>
+                </div>
+                <div style={{flex:1}}>
+                  {editing ? (
+                    <>
+                      <label className="flabel">Full Name</label>
+                      <input className="finput" value={f.full_name} onChange={e => setF(p=>({...p,full_name:e.target.value}))} placeholder="Your name"/>
+                      <label className="flabel">College</label>
+                      <input className="finput" value={f.college} onChange={e => setF(p=>({...p,college:e.target.value}))} placeholder="Your college"/>
+                      <label className="flabel">Bio</label>
+                      <textarea className="finput ftextarea" value={f.bio} onChange={e => setF(p=>({...p,bio:e.target.value}))} placeholder="Tell buyers about yourself…"/>
+                      <label className="flabel">Year</label>
+                      <select className="finput" value={f.year||""} onChange={e => setF(p=>({...p,year:e.target.value}))}>
+                        <option value="">Select year</option>
+                        {["1st Year","2nd Year","3rd Year","4th Year","5th Year","Graduated"].map(y => <option key={y} value={y}>{y}</option>)}
+                      </select>
+                      <label className="flabel">Programme</label>
+                      <select className="finput" value={f.programme||""} onChange={e => setF(p=>({...p,programme:e.target.value}))}>
+                        <option value="">Select programme</option>
+                        {["BA LLB","BBA LLB","BSc LLB","BCom LLB","LLB","LLM"].map(p => <option key={p} value={p}>{p}</option>)}
+                      </select>
+                      <div style={{display:"flex",gap:"1rem",marginTop:"1rem"}}>
+                        <button className="btn-full" style={{width:"auto",padding:"0.5rem 1.5rem"}} onClick={save} disabled={saving}>{saving?"Saving…":"Save"}</button>
+                        <button onClick={() => setEditing(false)} style={{color:"var(--stone)",fontSize:"0.85rem",textDecoration:"underline"}}>Cancel</button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.8rem",fontWeight:600,color:"var(--ink)"}}>{profile.full_name||"No name set"}</h2>
+                      {profile.college   && <p style={{color:"var(--stone)",margin:"0.25rem 0",fontSize:"0.88rem"}}>{profile.college}</p>}
+                      {profile.year      && <p style={{color:"var(--stone)",margin:"0.25rem 0",fontSize:"0.88rem"}}>{profile.year}</p>}
+                      {profile.programme && <p style={{color:"var(--stone)",margin:"0.25rem 0",fontSize:"0.88rem"}}>{profile.programme}</p>}
+                      {profile.bio       && <p style={{marginTop:"0.75rem",fontSize:"0.9rem",lineHeight:1.6,color:"var(--ink2)"}}>{profile.bio}</p>}
+                      <button onClick={() => setEditing(true)} style={{marginTop:"1rem",color:"var(--sienna)",fontSize:"0.84rem",textDecoration:"underline"}}>Edit Profile</button>
+                    </>
+                  )}
+                </div>
+              </div>
+              <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.5rem",fontWeight:500,color:"var(--ink)",marginBottom:"1.5rem"}}>My Uploaded Notes ({myNotes.length})</h2>
+              {notesLoading
+                ? <div className="notes-grid">{[1,2,3].map(i => <SkeletonCard key={i}/>)}</div>
+                : myNotes.length === 0
+                  ? <div className="empty">You haven't uploaded any notes yet. <button className="link-btn" onClick={() => go("sell")}>Upload now</button></div>
+                  : <div className="notes-grid">{myNotes.map(n => <NoteCard key={n.id} note={n} addToCart={addToCart} purchases={purchases} openPreview={openPreview}/>)}</div>
+              }
+            </>
+          )}
+          {activeTab === "dashboard" && (
+            <SellerDashboard myNotes={myNotes} purchases={purchases} go={go} profile={profile}/>
+          )}
+        </div>
+      );
+    }
+
+    // ── LIBRARY ──────────────────────────────────────────────────────────
+    function Library({ go, notes, purchases, addToCart, openPreview }) {
+      const purchasedNotes = notes.filter(n => purchases.find(p => p.note_id === n.id));
+      return (
+        <>
+          <div className="page-hero">
+            <div className="page-hero-inner">
+              <h1 className="page-h1">My Library</h1>
+              <p className="page-sub-text">{purchasedNotes.length} note{purchasedNotes.length!==1?"s":""} purchased</p>
+            </div>
+          </div>
+          <div className="page-wrap">
+            {purchasedNotes.length === 0 ? (
+              <div className="empty">
+                <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"2.5rem",color:"var(--border2)",marginBottom:"1rem"}}>&#8709;</div>
+                <p>You haven't purchased any notes yet.</p>
+                <button className="link-btn" onClick={() => go("browse")}>Browse notes</button>
+              </div>
+            ) : (
+              <div className="notes-grid">
+                {purchasedNotes.map(n => (
+                  <div key={n.id} className="ncard" style={{borderLeft:"3px solid var(--success)"}}>
+                    <div className="nsubj">{n.subject||"General"}</div>
+                    <h3 className="ntitle">{n.title}</h3>
+                    <div className="ndetails">
+                      {n.pages && <span>{n.pages} pages</span>}
+                      <span style={{color:"var(--success)",fontWeight:600,fontSize:"0.76rem",marginLeft:"0.75rem"}}>Purchased</span>
+                    </div>
+                    <div className="nfooter">
+                      <span className="nprice">₹{n.price}</span>
+                      <div style={{display:"flex",gap:"0.6rem",alignItems:"center",flexWrap:"wrap"}}>
+                        {n.preview_url && <button type="button" className="btn-cart" style={{background:"transparent",color:"var(--ink)",border:"1px solid var(--border2)"}} onClick={() => openPreview?.(n.preview_url, n.title)}>Preview</button>}
+                        {n.file_url && (
+                          <a href={n.file_url} target="_blank" rel="noreferrer" style={{background:"var(--success)",color:"white",padding:"0.42rem 1rem",fontSize:"0.78rem",fontWeight:600,letterSpacing:"0.05em"}}>
+                            Download
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      );
+    }
+
+    // ── SELLERS ──────────────────────────────────────────────────────────
+    function Sellers({ go, addToCart, notes, notesLoading, purchases, openPreview }) {
+      const [sellers, setSellers]             = useState([]);
+      const [loading, setLoading]             = useState(true);
+      const [q, setQ]                         = useState("");
+      const [filterCollege, setFilterCollege] = useState("all");
+      const [selected, setSelected]           = useState(null);
+
+      useEffect(() => {
+        const load = async () => {
+          const { data, error } = await supabase.from("profiles").select("*").not("full_name","is",null);
+          if (!error) setSellers(data || []);
+          setLoading(false);
+        };
+        load();
+      }, []);
+
+      const colleges = ["all", ...new Set(sellers.map(s => s.college).filter(Boolean))];
+      const shown = sellers
+        .filter(s => filterCollege==="all" || s.college===filterCollege)
+        .filter(s =>
+          (s.full_name||"").toLowerCase().includes(q.toLowerCase()) ||
+          (s.college||"").toLowerCase().includes(q.toLowerCase())
+        );
+
+      if (selected) {
+        const sellerNotes = notes.filter(n => n.is_approved !== false && !n.is_deleted && n.seller_id === selected.id);
+        return (
+          <div className="page-wrap">
+            <button className="back-btn" onClick={() => setSelected(null)}>← Back to Sellers</button>
+            <div style={{background:"var(--white)",border:"1px solid var(--border)",padding:"2rem",marginBottom:"2rem",display:"flex",gap:"2rem",alignItems:"flex-start",flexWrap:"wrap"}}>
+              <div style={{flexShrink:0}}>
+                <div style={{width:"80px",height:"80px",borderRadius:"50%",overflow:"hidden",background:"var(--parchment)",border:"1px solid var(--border2)"}}>
+                  {selected.avatar_url
+                    ? <img src={selected.avatar_url} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+                    : <div style={{width:"100%",height:"100%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Cormorant Garamond',serif",fontSize:"2rem",color:"var(--stone)"}}>{(selected.full_name||"A")[0]}</div>
+                  }
+                </div>
+              </div>
+              <div style={{flex:1}}>
+                <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"2rem",fontWeight:600,color:"var(--ink)",marginBottom:"0.5rem"}}>{selected.full_name}</h2>
+                <div style={{display:"flex",flexWrap:"wrap",gap:"0.5rem",marginBottom:"0.75rem",fontSize:"0.82rem",color:"var(--stone)"}}>
+                  {selected.college   && <span>{selected.college}</span>}
+                  {selected.year      && <><span>·</span><span>{selected.year}</span></>}
+                  {selected.programme && <><span>·</span><span>{selected.programme}</span></>}
+                  <><span>·</span><span>{sellerNotes.length} notes uploaded</span></>
+                </div>
+                {selected.bio && <p style={{fontSize:"0.9rem",lineHeight:1.7,color:"var(--ink2)"}}>{selected.bio}</p>}
+              </div>
+            </div>
+            <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.4rem",fontWeight:500,color:"var(--ink)",marginBottom:"1.5rem"}}>Notes by {selected.full_name}</h3>
+            {notesLoading
+              ? <div className="notes-grid">{[1,2,3].map(i => <SkeletonCard key={i}/>)}</div>
+              : sellerNotes.length === 0
+                ? <div className="empty">This seller hasn't uploaded any notes yet.</div>
+                : <div className="notes-grid">{sellerNotes.map(n => <NoteCard key={n.id} note={n} addToCart={addToCart} purchases={purchases} openPreview={openPreview}/>)}</div>
+            }
+          </div>
+        );
+      }
+
+      return (
+        <>
+          <div className="page-hero">
+            <div className="page-hero-inner">
+              <h1 className="page-h1">Browse Sellers</h1>
+              <p className="page-sub-text">Find notes from students at top law colleges across India</p>
+            </div>
+          </div>
+          <div className="page-wrap">
+            <div className="controls">
+              <input className="search-box" placeholder="Search by name or college…" value={q} onChange={e => setQ(e.target.value)}/>
+              <select className="sel" value={filterCollege} onChange={e => setFilterCollege(e.target.value)}>
+                {colleges.map(c => <option key={c} value={c}>{c==="all"?"All Colleges":c}</option>)}
+              </select>
+            </div>
+            {loading
+              ? <div className="subjects-grid">{[1,2,3,4].map(i => <SkeletonCard key={i}/>)}</div>
+              : shown.length === 0
+                ? <div className="empty">No sellers found.</div>
+                : <div className="subjects-grid">
+                    {shown.map(s => (
+                      <div key={s.id} className="scard" onClick={() => setSelected(s)}>
+                        <div style={{width:"52px",height:"52px",borderRadius:"50%",overflow:"hidden",background:"var(--parchment)",flexShrink:0,border:"1px solid var(--border2)",marginBottom:"1rem"}}>
+                          {s.avatar_url
+                            ? <img src={s.avatar_url} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+                            : <div style={{width:"100%",height:"100%",display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Cormorant Garamond',serif",fontSize:"1.4rem",color:"var(--stone)"}}>{(s.full_name||"A")[0]}</div>
+                          }
+                        </div>
+                        <div className="scard-name">{s.full_name}</div>
+                        {s.college && <div className="scard-desc" style={{marginBottom:"0.5rem"}}>{s.college}</div>}
+                        <div style={{display:"flex",flexWrap:"wrap",gap:"0.35rem",marginBottom:"0.65rem"}}>
+                          {s.year      && <span style={{background:"var(--parchment)",padding:"0.15rem 0.55rem",fontSize:"0.72rem",color:"var(--stone)"}}>{s.year}</span>}
+                          {s.programme && <span style={{background:"var(--parchment)",padding:"0.15rem 0.55rem",fontSize:"0.72rem",color:"var(--stone)"}}>{s.programme}</span>}
+                        </div>
+                        <div className="scard-count">{notes.filter(n => n.seller_id===s.id).length} notes</div>
+                      </div>
+                    ))}
+                  </div>
+            }
+          </div>
+        </>
+      );
+    }
+
+    // ── COMMUNITY ────────────────────────────────────────────────────────
+    function Community({ user, go }) {
+      const [thread, setThread]   = useState("general");
+      const [posts, setPosts]     = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [newPost, setNewPost] = useState("");
+      const [posting, setPosting] = useState(false);
+      const [replyTo, setReplyTo] = useState(null);
+      const [replyText, setReplyText] = useState("");
+      const [replies, setReplies] = useState({});
+      const [profile, setProfile] = useState(null);
+
+      useEffect(() => {
+        if (user) {
+          supabase.auth.getUser().then(({ data: { user: u } }) => {
+            if (u) supabase.from("profiles").select("full_name,avatar_url").eq("id",u.id).single()
+              .then(({ data }) => setProfile(data));
+          });
+        }
+      }, [user]);
+
+      useEffect(() => { loadPosts(); }, [thread]);
+
+      const loadPosts = async () => {
+        setLoading(true);
+        const { data, error } = await supabase.from("posts").select("*").eq("thread_id", thread).order("created_at", { ascending: false });
+        if (!error) setPosts(data || []);
+        setLoading(false);
+      };
+
+      const loadReplies = async (postId) => {
+        if (replies[postId]) { setReplyTo(replyTo===postId?null:postId); return; }
+        const { data } = await supabase.from("replies").select("*").eq("post_id",postId).order("created_at",{ascending:true});
+        setReplies(r => ({...r,[postId]:data||[]}));
+        setReplyTo(replyTo===postId?null:postId);
+      };
+
+      const submitPost = async () => {
+        if (!newPost.trim()) return;
+        if (!user) { go("login"); return; }
+        setPosting(true);
+        const { data: { user: u } } = await supabase.auth.getUser();
+        await supabase.from("posts").insert([{ thread_id:thread, author_id:u.id, author_name:profile?.full_name||u.email.split("@")[0], author_avatar:profile?.avatar_url||null, body:newPost.trim() }]);
+        setPosting(false);
+        setNewPost("");
+        loadPosts();
+      };
+
+      const submitReply = async (postId) => {
+        if (!replyText.trim() || !user) return;
+        const { data: { user: u } } = await supabase.auth.getUser();
+        await supabase.from("replies").insert([{ post_id:postId, author_id:u.id, author_name:profile?.full_name||u.email.split("@")[0], author_avatar:profile?.avatar_url||null, body:replyText.trim() }]);
+        setReplyText("");
+        const { data } = await supabase.from("replies").select("*").eq("post_id",postId).order("created_at",{ascending:true});
+        setReplies(r => ({...r,[postId]:data||[]}));
+      };
+
+      const likePost = async (post) => {
+        await supabase.from("posts").update({likes:(post.likes||0)+1}).eq("id",post.id);
+        setPosts(ps => ps.map(p => p.id===post.id ? {...p,likes:(p.likes||0)+1} : p));
+      };
+
+      const activeThread = COMM_THREADS.find(t => t.id===thread);
+
+      return (
+        <>
+          <div className="page-hero">
+            <div className="page-hero-inner">
+              <h1 className="page-h1">Community</h1>
+              <p className="page-sub-text">Discuss notes, subjects, and platform feedback with fellow students</p>
+            </div>
+          </div>
+          <div className="page-wrap">
+            <div className="comm-layout">
+              <div className="comm-sidebar">
+                <div className="comm-sidebar-title">Threads</div>
+                {COMM_THREADS.map(t => (
+                  <button key={t.id} className={`comm-thread-btn ${thread===t.id?"active":""}`} onClick={() => setThread(t.id)}>
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+              <div className="comm-main">
+                <div className="comm-compose">
+                  <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.1rem",fontWeight:500,color:"var(--ink)",marginBottom:"0.75rem"}}>{activeThread?.label}</div>
+                  <textarea
+                    placeholder={user ? "Share your thoughts, ask a question, or give feedback…" : "Sign in to post in this thread"}
+                    value={newPost}
+                    onChange={e => setNewPost(e.target.value)}
+                    disabled={!user}
+                  />
+                  <div className="comm-compose-footer">
+                    <span style={{fontSize:"0.76rem",color:"var(--stone)"}}>{newPost.length}/1000</span>
+                    {user
+                      ? <button className="btn-post" onClick={submitPost} disabled={posting||!newPost.trim()}>{posting?"Posting…":"Post"}</button>
+                      : <button className="btn-post" onClick={() => go("login")}>Sign In to Post</button>
+                    }
+                  </div>
+                </div>
+                {loading ? (
+                  [1,2,3].map(i => (
+                    <div key={i} className="comm-post">
+                      <div className="skel" style={{height:"10px",width:"25%",marginBottom:"0.5rem"}}/>
+                      <div className="skel" style={{height:"13px",width:"85%"}}/>
+                      <div className="skel" style={{height:"13px",width:"65%"}}/>
+                    </div>
+                  ))
+                ) : posts.length === 0 ? (
+                  <div className="empty" style={{background:"var(--white)",border:"1px solid var(--border)"}}>No posts yet. Be the first to post in this thread.</div>
+                ) : posts.map(post => (
+                  <div key={post.id} className="comm-post">
+                    <div className="comm-post-header">
+                      <div className="comm-avatar">
+                        {post.author_avatar ? <img src={post.author_avatar} style={{width:"100%",height:"100%",objectFit:"cover"}}/> : (post.author_name||"A")[0].toUpperCase()}
+                      </div>
+                      <div>
+                        <div className="comm-author">{post.author_name}</div>
+                        <div className="comm-time">{timeAgo(post.created_at)}</div>
+                      </div>
+                      <span className="comm-tag">{activeThread?.label}</span>
+                    </div>
+                    <div className="comm-body">{post.body}</div>
+                    <div className="comm-actions">
+                      <button className="comm-action-btn" onClick={() => likePost(post)}>
+                        {post.likes||0} likes
+                      </button>
+                      <button className="comm-action-btn" onClick={() => loadReplies(post.id)}>
+                        {replyTo===post.id?"Hide replies":"Reply"}{replies[post.id]?.length > 0 ? ` (${replies[post.id].length})` : ""}
+                      </button>
+                      {user && post.author_name === (profile?.full_name || user.split("@")[0]) && (
+                        <button className="comm-action-btn" style={{color:"var(--danger)"}} onClick={async () => {
+                          await supabase.from("posts").delete().eq("id", post.id);
+                          setPosts(ps => ps.filter(p => p.id !== post.id));
+                        }}>Unlist</button>
+                      )}
+                    </div>
+                    {replyTo===post.id && (
+                      <div className="comm-replies">
+                        {(replies[post.id]||[]).map(r => (
+                          <div key={r.id} className="comm-reply">
+                            <div className="comm-avatar" style={{width:"28px",height:"28px",fontSize:"0.8rem",flexShrink:0}}>
+                              {r.author_avatar ? <img src={r.author_avatar} style={{width:"100%",height:"100%",objectFit:"cover"}}/> : (r.author_name||"A")[0].toUpperCase()}
+                            </div>
+                            <div className="comm-reply-body">
+                              <div className="comm-reply-author" style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                                <span>{r.author_name} <span style={{fontWeight:400,color:"var(--stone)",fontSize:"0.72rem"}}>{timeAgo(r.created_at)}</span></span>
+                                {user && r.author_name === (profile?.full_name || user.split("@")[0]) && (
+                                  <button style={{color:"var(--danger)",fontSize:"0.72rem"}} onClick={async () => {
+                                    await supabase.from("replies").delete().eq("id", r.id);
+                                    setReplies(prev => ({...prev, [post.id]: prev[post.id].filter(x => x.id !== r.id)}));
+                                  }}>Unlist</button>
+                                )}
+                              </div>
+                              {r.body}
+                            </div>
+                          </div>
+                        ))}
+                        {user && (
+                          <div style={{display:"flex",gap:"0.75rem",alignItems:"flex-start",marginTop:"0.5rem"}}>
+                            <div className="comm-avatar" style={{width:"28px",height:"28px",fontSize:"0.8rem",flexShrink:0}}>
+                              {profile?.avatar_url ? <img src={profile.avatar_url} style={{width:"100%",height:"100%",objectFit:"cover"}}/> : (user.split("@")[0]||"A")[0].toUpperCase()}
+                            </div>
+                            <div style={{flex:1}}>
+                              <input
+                                style={{width:"100%",padding:"0.5rem 0.75rem",border:"1px solid var(--border)",fontSize:"0.84rem",outline:"none",fontFamily:"inherit",background:"var(--parchment)",color:"var(--ink)"}}
+                                placeholder="Write a reply…"
+                                value={replyText}
+                                onChange={e => setReplyText(e.target.value)}
+                                onKeyDown={e => { if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submitReply(post.id);}}}
+                              />
+                            </div>
+                            <button className="btn-post" style={{flexShrink:0}} onClick={() => submitReply(post.id)} disabled={!replyText.trim()}>Reply</button>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    // ── ADMIN ────────────────────────────────────────────────────────────
+    function AdminLogin({ onLogin, showToast }) {
+      const [email, setEmail] = useState("");
+      const [pass, setPass]   = useState("");
+      const submit = () => {
+        if (email === ADMIN_EMAIL && pass === ADMIN_PASS) { onLogin(); showToast("Admin access granted."); }
+        else showToast("Invalid admin credentials.", "error");
+      };
+      return (
+        <div className="admin-login">
+          <div className="admin-login-card">
+            <h2>Admin Access</h2>
+            <div style={{width:"30px",height:"1px",background:"var(--sienna)",margin:"0.75rem 0 1.5rem"}}/>
+            <p>Restricted to LexNotes editorial staff only.</p>
+            <label className="flabel">Admin Email</label>
+            <input className="finput" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="admin@lexnotes.in"/>
+            <label className="flabel">Password</label>
+            <input className="finput" type="password" value={pass} onChange={e => setPass(e.target.value)} placeholder="••••••••" onKeyDown={e => e.key==="Enter" && submit()}/>
+            <button className="btn-full" style={{marginTop:"1.5rem"}} onClick={submit}>Access Panel</button>
+          </div>
+        </div>
+      );
+    }
+
+    function AdminPanel({ go, showToast, refreshNotes, openPreview }) {
+      const [tab, setTab]         = useState("overview");
+      const [notes, setNotes]     = useState([]);
+      const [users, setUsers]     = useState([]);
+      const [posts, setPosts]     = useState([]);
+      const [loading, setLoading] = useState(true);
+
+      useEffect(() => { loadAll(); }, []);
+
+      const loadAll = async () => {
+        setLoading(true);
+        const [{ data: nd }, { data: ud }, { data: pd }] = await Promise.all([
+          supabase.from("notes").select("*, profiles(full_name,college)").order("created_at",{ascending:false}),
+          supabase.from("profiles").select("*").order("id",{ascending:false}),
+          supabase.from("posts").select("*").order("created_at",{ascending:false}),
+        ]);
+        setNotes(nd||[]); setUsers(ud||[]); setPosts(pd||[]);
+        setLoading(false);
+      };
+
+      const approveNote = async (id) => {
+        const { error } = await supabase
+          .from("notes")
+          .update({ is_approved: true, is_deleted: false })
+          .eq("id", id);
+
+        if (error) {
+          showToast("Approve failed: " + error.message, "error");
+          return;
+        }
+
+        await loadAll();
+        await refreshNotes?.();
+        showToast("Note approved and visible publicly.");
+      };
+
+      const rejectNote = async (id) => {
+        const { error } = await supabase
+          .from("notes")
+          .update({ is_approved: false, is_deleted: true })
+          .eq("id", id);
+
+        if (error) {
+          showToast("Unlist failed: " + error.message, "error");
+          return;
+        }
+
+        await loadAll();
+        await refreshNotes?.();
+        showToast("Note unlisted from public pages. Existing buyers keep access.");
+      };
+
+      const deleteNote = async (id) => {
+        if (!window.confirm("Unlist this note from public pages? Existing buyers keep access.")) return;
+
+        const { error } = await supabase
+          .from("notes")
+          .update({ is_deleted: true, is_approved: false })
+          .eq("id", id);
+
+        if (error) {
+          showToast("Unlist failed: " + error.message, "error");
+          return;
+        }
+
+        await loadAll();
+        await refreshNotes?.();
+        showToast("Note unlisted from public pages. Existing buyers keep access.");
+      };
+
+      const deletePost = async (id) => {
+        if (!window.confirm("Delete this post?")) return;
+        await supabase.from("posts").delete().eq("id",id);
+        setPosts(p => p.filter(x => x.id!==id)); showToast("Post removed.");
+      };
+
+      const totalRevenue = notes.length * 249;
+      const TABS = ["overview","notes","users","posts"];
+
+      return (
+        <>
+          <div className="admin-header">
+            <h1>LexNotes Admin</h1>
+            <p>Editorial &amp; moderation dashboard · {new Date().toLocaleDateString("en-IN",{dateStyle:"long"})}</p>
+          </div>
+          <div className="admin-nav">
+            {TABS.map(t => (
+              <button key={t} className={`admin-nav-btn ${tab===t?"active":""}`} onClick={() => setTab(t)}>
+                {t.charAt(0).toUpperCase()+t.slice(1)}
+              </button>
+            ))}
+            <button className="admin-nav-btn" style={{marginLeft:"auto"}} onClick={() => go("home")}>← Exit to Site</button>
+          </div>
+          <div className="admin-wrap">
+            {loading && <div className="empty">Loading data…</div>}
+            {!loading && tab === "overview" && (
+              <>
+                <div className="admin-stats" style={{marginTop:"2rem"}}>
+                  {[
+                    {label:"Total Notes",     value:notes.length},
+                    {label:"Registered Users",value:users.length},
+                    {label:"Community Posts", value:posts.length},
+                    {label:"Pending Notes",   value:notes.filter(n => n.is_approved === false).length},
+                    {label:"Approved Notes",  value:notes.filter(n => n.is_approved !== false && !n.is_deleted).length},
+                  ].map(s => (
+                    <div key={s.label} className="admin-stat">
+                      <div className="admin-stat-val">{s.value}</div>
+                      <div className="admin-stat-label">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"2rem",marginTop:"0.5rem"}}>
+                  <div className="admin-table-wrap">
+                    <div className="admin-table-head"><h3>Recent Notes</h3><button className="admin-action-btn" onClick={() => setTab("notes")}>View all</button></div>
+                    <table className="admin-table">
+                      <thead><tr><th>Title</th><th>Subject</th><th>Price</th></tr></thead>
+                      <tbody>
+                        {notes.slice(0,5).map(n => (
+                          <tr key={n.id}><td style={{fontWeight:500,color:"var(--ink)",maxWidth:"180px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{n.title}</td><td style={{color:"var(--stone)"}}>{n.subject}</td><td>₹{n.price}</td></tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="admin-table-wrap">
+                    <div className="admin-table-head"><h3>Recent Users</h3><button className="admin-action-btn" onClick={() => setTab("users")}>View all</button></div>
+                    <table className="admin-table">
+                      <thead><tr><th>Name</th><th>College</th></tr></thead>
+                      <tbody>
+                        {users.slice(0,5).map(u => (
+                          <tr key={u.id}><td style={{fontWeight:500,color:"var(--ink)"}}>{u.full_name||"—"}</td><td style={{color:"var(--stone)"}}>{u.college||"—"}</td></tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </>
+            )}
+            {!loading && tab === "notes" && (
+              <>
+                <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.5rem",fontWeight:400,margin:"2rem 0 1.5rem"}}>All Notes ({notes.length})</h2>
+                <div className="admin-table-wrap">
+                  <table className="admin-table">
+                    <thead><tr><th>Title</th><th>Subject</th><th>Creator</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody>
+                      {notes.map(n => (
+                        <tr key={n.id}>
+                          <td style={{fontWeight:500,color:"var(--ink)",maxWidth:"200px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{n.title}</td>
+                          <td style={{color:"var(--stone)"}}>{n.subject}</td>
+                          <td style={{color:"var(--stone)"}}>{n.profiles?.full_name||"—"}</td>
+                          <td>₹{n.price}</td>
+                          <td><span className={`badge ${n.is_deleted ? "badge-banned" : (n.is_approved !== false ? "badge-approved" : "badge-pending")}`}>{n.is_deleted ? "Unlisted" : (n.is_approved !== false ? "Approved" : "Pending")}</span></td>
+                          <td>
+                            <div className="status-actions">
+                              {n.preview_url && <button className="admin-action-btn" onClick={() => openPreview?.(n.preview_url, n.title)}>Preview</button>}
+                              {n.file_url && <a href={n.file_url} target="_blank" rel="noreferrer"><button className="admin-action-btn">Full</button></a>}
+                              <button className="admin-action-btn success" onClick={() => approveNote(n.id)}>Approve</button>
+                              <button className="admin-action-btn" onClick={() => rejectNote(n.id)}>Unlist</button>
+                              <button className="admin-action-btn danger" onClick={() => deleteNote(n.id)}>Unlist</button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+            {!loading && tab === "users" && (
+              <>
+                <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.5rem",fontWeight:400,margin:"2rem 0 1.5rem"}}>Registered Users ({users.length})</h2>
+                <div className="admin-table-wrap">
+                  <table className="admin-table">
+                    <thead><tr><th>Name</th><th>College</th><th>Programme</th><th>Year</th><th>Notes</th><th>Status</th></tr></thead>
+                    <tbody>
+                      {users.map(u => (
+                        <tr key={u.id}>
+                          <td style={{fontWeight:600,color:"var(--ink)"}}>{u.full_name||"—"}</td>
+                          <td style={{color:"var(--stone)"}}>{u.college||"—"}</td>
+                          <td style={{color:"var(--stone)"}}>{u.programme||"—"}</td>
+                          <td style={{color:"var(--stone)"}}>{u.year||"—"}</td>
+                          <td>{notes.filter(n=>n.seller_id===u.id).length}</td>
+                          <td><span className="badge badge-active">Active</span></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+            {!loading && tab === "posts" && (
+              <>
+                <h2 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.5rem",fontWeight:400,margin:"2rem 0 1.5rem"}}>Community Posts ({posts.length})</h2>
+                <div className="admin-table-wrap">
+                  <table className="admin-table">
+                    <thead><tr><th>Author</th><th>Thread</th><th>Preview</th><th>Likes</th><th>Date</th><th>Action</th></tr></thead>
+                    <tbody>
+                      {posts.map(p => (
+                        <tr key={p.id}>
+                          <td style={{fontWeight:600,color:"var(--ink)"}}>{p.author_name||"—"}</td>
+                          <td><span className="badge badge-approved" style={{background:"var(--parchment)",color:"var(--stone)"}}>{p.thread_id}</span></td>
+                          <td style={{color:"var(--stone)",maxWidth:"220px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{p.body}</td>
+                          <td>{p.likes||0}</td>
+                          <td style={{color:"var(--stone)",fontSize:"0.78rem"}}>{timeAgo(p.created_at)}</td>
+                          <td><button className="admin-action-btn danger" onClick={() => deletePost(p.id)}>Remove</button></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
+            )}
+          </div>
+        </>
+      );
+    }
+
+    // ── FOOTER ───────────────────────────────────────────────────────────
+    function Footer({ go }) {
+      return (
+        <footer className="footer">
+          <div className="footer-top">
+            <div>
+              <div className="footer-logo"><span className="footer-logo-sq">⚖</span>LexNotes</div>
+              <div className="footer-tagline">A curated library of premium legal study materials, built for India's next generation of lawyers.</div>
+            </div>
+            <div>
+              <div className="footer-col-title">Library</div>
+              <div className="footer-links-col">
+                <button className="flink" onClick={() => go("browse")}>Browse Notes</button>
+                <button className="flink" onClick={() => go("browse")}>All Subjects</button>
+                <button className="flink" onClick={() => go("sellers")}>Creators</button>
+              </div>
+            </div>
+            <div>
+              <div className="footer-col-title">Creators</div>
+              <div className="footer-links-col">
+                <button className="flink" onClick={() => go("sell")}>Submit a Note</button>
+                <button className="flink">Editorial Guide</button>
+                <button className="flink">Royalties</button>
+              </div>
+            </div>
+            <div>
+              <div className="footer-col-title">Company</div>
+              <div className="footer-links-col">
+                <button className="flink" onClick={() => go("community")}>Community</button>
+                <button className="flink" onClick={() => go("login")}>Sign In</button>
+                <button className="flink" onClick={() => go("register")}>Join</button>
+                <button className="flink" onClick={() => go("privacy")}>Privacy Policy</button>
+                <button className="flink" onClick={() => go("terms")}>Terms of Service</button>
+                <button className="flink" onClick={() => go("cookies")}>Cookie Policy</button>
+                <button className="flink" onClick={() => go("admin")}>Admin</button>
+              </div>
+            </div>
+          </div>
+          <div className="footer-bottom">
+            <div className="footer-copy">© 2026 LexNotes Marketplace · All rights reserved</div>
+            <div className="footer-latin">Lex sine scientia nihil est.</div>
+          </div>
+        </footer>
+      );
+    }
+
+    // ── LEGAL PAGES ──────────────────────────────────────────────────────
+    function LegalPage({ title, go, children }) {
+      return (
+        <>
+          <div className="page-hero">
+            <div className="page-hero-inner">
+              <h1 className="page-h1">{title}</h1>
+              <p className="page-sub-text">Last updated: May 2026</p>
+            </div>
+          </div>
+          <div className="page-wrap" style={{maxWidth:"820px"}}>
+            <button className="back-btn" onClick={() => go("home")}>← Back to Home</button>
+            <div style={{fontSize:"0.92rem",lineHeight:1.85,color:"var(--ink2)"}}>
+              {children}
+            </div>
+          </div>
+        </>
+      );
+    }
+
+    function PrivacyPolicy({ go }) {
+      return (
+        <LegalPage title="Privacy Policy" go={go}>
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>1. Who We Are</h3>
+          <p>LexNotes ("we", "us", "our") is an online marketplace for law school study notes operated from India. Our website is <strong>lexnotes-seven.vercel.app</strong>. For privacy concerns, contact us at <strong>admin@lexnotes.in</strong>.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>2. Information We Collect</h3>
+          <p><strong>Account data:</strong> When you register, we collect your email address, name, college, year, and programme of study.</p>
+          <p style={{marginTop:"0.5rem"}}><strong>Content data:</strong> Notes, documents, and materials you upload to sell on the platform.</p>
+          <p style={{marginTop:"0.5rem"}}><strong>Transaction data:</strong> Records of notes purchased and payments processed.</p>
+          <p style={{marginTop:"0.5rem"}}><strong>Usage data:</strong> Pages visited, features used, and general analytics (if you have consented to cookies).</p>
+          <p style={{marginTop:"0.5rem"}}><strong>Profile data:</strong> Optional profile photo and biography you choose to provide.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>3. How We Use Your Information</h3>
+          <p>We use your data to: provide and operate the marketplace; process purchases and payments; verify seller identity and approve content; communicate important account updates; improve site functionality; and comply with applicable Indian laws including the Information Technology Act, 2000 and the Digital Personal Data Protection Act, 2023.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>4. Data Storage and Security</h3>
+          <p>Your data is stored securely via Supabase (PostgreSQL) with row-level security policies. Files are stored in Supabase Storage. We do not sell your personal data to third parties. Reasonable technical and organisational measures are in place to protect your data.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>5. Cookies</h3>
+          <p>We use cookies to maintain your session (login state) and, with your consent, to collect analytics data to understand how the site is used. You may decline non-essential cookies via the cookie banner. See our <button className="link-btn" onClick={() => go("cookies")} style={{fontSize:"inherit"}}>Cookie Policy</button> for full details.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>6. Your Rights</h3>
+          <p>Under applicable Indian law and as a matter of good practice, you have the right to: access the personal data we hold about you; correct inaccurate data; request deletion of your account and associated data; withdraw consent for analytics at any time. To exercise these rights, email <strong>admin@lexnotes.in</strong>.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>7. Third-Party Services</h3>
+          <p>LexNotes uses the following third-party services which may process your data: <strong>Supabase</strong> (database and authentication); <strong>Vercel</strong> (hosting and deployment); <strong>Google Fonts</strong> (typography, loaded over CDN). Each service has its own privacy policy.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>8. Changes to This Policy</h3>
+          <p>We may update this policy from time to time. Continued use of the platform after changes constitutes acceptance. Significant changes will be communicated via the email address on your account.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>9. Contact</h3>
+          <p>For any privacy-related queries, write to: <strong>admin@lexnotes.in</strong></p>
+        </LegalPage>
+      );
+    }
+
+    function TermsOfService({ go }) {
+      return (
+        <LegalPage title="Terms of Service" go={go}>
+          <p>Please read these Terms of Service carefully before using LexNotes. By accessing or using our platform, you agree to be bound by these terms.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>1. Definitions</h3>
+          <p>"Platform" means the LexNotes website at lexnotes-seven.vercel.app. "Buyer" means any registered user who purchases notes. "Seller" means any registered user who uploads and sells notes. "Content" means any notes, documents, or study materials listed on the platform.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>2. Eligibility</h3>
+          <p>You must be at least 18 years of age, or a law student under the supervision of a legal guardian, to use this platform. By registering, you confirm that you are eligible to enter into a legally binding contract under Indian law.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>3. Seller Obligations</h3>
+          <p>By uploading content to LexNotes, you warrant that: (a) the notes are your original work; (b) you are not reproducing substantial portions of copyrighted textbooks, question papers, or any material you do not own; (c) the content does not infringe any third-party intellectual property rights; (d) you have the right to sell and distribute the material. You retain ownership of your content. You grant LexNotes a non-exclusive, royalty-free licence to host, display, and distribute the content on the platform.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>4. Revenue Share</h3>
+          <p>Sellers receive 80% of each sale. LexNotes retains 20% as a platform fee. Earnings will be disbursed subject to payment processing timelines and minimum thresholds as communicated separately. All transactions are in Indian Rupees (INR).</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>5. Buyer Rights and Refunds</h3>
+          <p>Upon successful purchase, buyers receive a non-transferable, personal licence to access and download the purchased notes for their own academic use. Resale or redistribution is strictly prohibited. Refunds may be considered on a case-by-case basis where content materially misrepresents what was described. To request a refund, contact admin@lexnotes.in within 48 hours of purchase.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>6. Prohibited Content</h3>
+          <p>The following content is strictly prohibited: direct reproductions of copyrighted textbooks or university materials; content that is misleading, inaccurate, or deliberately harmful; plagiarised material; content that violates any applicable law. LexNotes reserves the right to remove any content and suspend accounts that violate these terms without notice.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>7. Intellectual Property</h3>
+          <p>The LexNotes name, logo, website design, and all platform code are the intellectual property of LexNotes and may not be reproduced without written permission. This platform is governed by the Copyright Act, 1957 (India).</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>8. Limitation of Liability</h3>
+          <p>LexNotes is a marketplace platform. We do not guarantee the accuracy, completeness, or academic merit of any notes listed. We are not liable for any loss, academic consequence, or damage arising from reliance on content purchased through the platform. Our liability is limited to the amount paid for the specific transaction in question.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>9. Governing Law</h3>
+          <p>These Terms are governed by and construed in accordance with the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts of Mumbai, Maharashtra.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>10. Contact</h3>
+          <p>For any queries regarding these Terms, contact: <strong>admin@lexnotes.in</strong></p>
+        </LegalPage>
+      );
+    }
+
+    function CookiePolicy({ go }) {
+      return (
+        <LegalPage title="Cookie Policy" go={go}>
+          <p>This policy explains how LexNotes uses cookies and similar technologies on our website.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>1. What Are Cookies</h3>
+          <p>Cookies are small text files stored on your device when you visit a website. They help the website function correctly and provide information about how visitors use the site.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>2. Cookies We Use</h3>
+          <p><strong>Essential cookies (always active):</strong> These are required for the platform to function. They maintain your login session via Supabase authentication (stored under the key "lexnotes-auth" in localStorage). Without these, you cannot sign in or access your library. No consent is required for essential cookies.</p>
+          <p style={{marginTop:"0.75rem"}}><strong>Analytics cookies (consent required):</strong> If you accept cookies, we may use analytics tools to understand aggregate usage patterns — pages visited, features used, and time spent. This data is anonymised and used solely to improve the platform. No individual user is identified.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>3. Your Choices</h3>
+          <p>When you first visit LexNotes, a cookie banner will appear. You may accept or decline non-essential analytics cookies. You can change your preference at any time by clearing your browser cookies and revisiting the site. Declining analytics cookies does not affect your ability to use any feature of the platform.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>4. Third-Party Cookies</h3>
+          <p>Google Fonts (used for typography) may set cookies when loading fonts from their CDN. These are governed by Google's own privacy policy. We do not use advertising or retargeting cookies.</p>
+
+          <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"1.3rem",margin:"1.5rem 0 0.5rem",color:"var(--ink)"}}>5. Contact</h3>
+          <p>Cookie-related queries: <strong>admin@lexnotes.in</strong></p>
+        </LegalPage>
+      );
+    }
+
+    // ── URL ROUTING HELPERS ──────────────────────────────────────────────
+    const ROUTABLE_PAGES = new Set([
+      "home", "browse", "sell", "sellers", "community", "privacy", "terms", "cookies",
+      "login", "register", "library", "profile", "admin", "subject"
+    ]);
+
+    const PUBLIC_SITEMAP_PAGES = new Set(["home", "browse", "sell", "sellers", "community", "privacy", "terms", "cookies"]);
+
+    function getRouteFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const requestedPage = (params.get("page") || "home").toLowerCase();
+      const page = ROUTABLE_PAGES.has(requestedPage) ? requestedPage : "home";
+
+      let ctx = {};
+      if (page === "subject") {
+        const subjectId = params.get("subject");
+        const subject = SUBJECTS.find(s => s.id === subjectId);
+        if (subject) ctx.subject = subject;
+      }
+
+      return { page, ctx };
+    }
+
+    function buildUrlForPage(page, ctx = {}) {
+      if (page === "home") return window.location.pathname;
+
+      const params = new URLSearchParams();
+      params.set("page", page);
+
+      if (page === "subject" && ctx.subject?.id) {
+        params.set("subject", ctx.subject.id);
+      }
+
+      return `${window.location.pathname}?${params.toString()}`;
+    }
+
+    // ── APP ROOT ─────────────────────────────────────────────────────────
+    function App() {
+      const initialRoute = getRouteFromUrl();
+      const [page, setPage]           = useState(initialRoute.page);
+      const [ctx,  setCtx]            = useState(initialRoute.ctx);
+      const [cart, setCart]           = useState([]);
+      const [cartOpen, setCartOpen]   = useState(false);
+      const [user, setUser]           = useState(null);
+      const [toast, setToast]         = useState(null);
+      const [notes, setNotes]         = useState([]);
+      const [notesLoading, setNL]     = useState(true);
+      const [notesError,   setNE]     = useState(null);
+      const [purchases, setPurchases] = useState([]);
+      const [isAdmin, setIsAdmin]     = useState(false);
+      const [adminAuthed, setAdminAuthed] = useState(false);
+      const [previewModal, setPreviewModal] = useState(null);
+      const [cookieConsent, setCookieConsent] = useState(() => localStorage.getItem("lexnotes-cookie-consent"));
+      const [showBackTop, setShowBackTop]     = useState(false);
+
+      useEffect(() => {
+        const onScroll = () => setShowBackTop(window.scrollY > 400);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+      }, []);
+
+      useEffect(() => {
+        const onPopState = () => {
+          const nextRoute = getRouteFromUrl();
+          setPage(nextRoute.page);
+          setCtx(nextRoute.ctx);
+          window.scrollTo({ top: 0, behavior: "auto" });
+        };
+        window.addEventListener("popstate", onPopState);
+        return () => window.removeEventListener("popstate", onPopState);
+      }, []);
+
+      const acceptCookies = () => { localStorage.setItem("lexnotes-cookie-consent","accepted"); setCookieConsent("accepted"); };
+      const declineCookies = () => { localStorage.setItem("lexnotes-cookie-consent","declined"); setCookieConsent("declined"); };
+
+      const fetchNotes = async () => {
+        setNL(true); setNE(null);
+        const { data, error } = await supabase
+          .from("notes")
+          .select("*, profiles(full_name, college, avatar_url)")
+          .order("created_at", { ascending: false });
+        if (error) { setNE(error.message); } else { setNotes(data || []); }
+        setNL(false);
+      };
+
+      const fetchPurchases = async (uid) => {
+        if (!uid) { setPurchases([]); return; }
+        const { data } = await supabase.from("purchases").select("*").eq("buyer_id", uid);
+        setPurchases(data || []);
+      };
+
+      useEffect(() => {
+        supabase.auth.getSession().then(({ data }) => {
+          if (data.session) {
+            setUser(data.session.user.email);
+            setIsAdmin(data.session.user.email === ADMIN_EMAIL);
+            fetchPurchases(data.session.user.id);
+          }
+        });
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+          setUser(session ? session.user.email : null);
+          setIsAdmin(session?.user?.email === ADMIN_EMAIL);
+          if (session?.user?.email !== ADMIN_EMAIL) setAdminAuthed(false);
+          fetchPurchases(session?.user?.id || null);
+        });
+        fetchNotes();
+        const channel = supabase
+          .channel("notes-realtime")
+          .on("postgres_changes", { event:"*", schema:"public", table:"notes" }, fetchNotes)
+          .subscribe();
+        return () => { subscription.unsubscribe(); supabase.removeChannel(channel); };
+      }, []);
+
+      const go = (p, c = {}) => {
+        const safePage = ROUTABLE_PAGES.has(p) ? p : "home";
+        setPage(safePage);
+        setCtx(c);
+
+        const nextUrl = buildUrlForPage(safePage, c);
+        const currentUrl = `${window.location.pathname}${window.location.search}`;
+        if (nextUrl !== currentUrl) {
+          window.history.pushState({ page: safePage }, "", nextUrl);
+        }
+
+        window.scrollTo({top:0,behavior:"smooth"});
+      };
+
+      const openPreview = (url, title = "Document Preview") => {
+        if (!url) return;
+        setPreviewModal({ url, title });
+      };
+
+      const showToast = (msg, type="success") => {
+        setToast({msg,type});
+        setTimeout(() => setToast(null), 3500);
+      };
+
+      const addToCart = note => {
+        if (cart.find(c => c.id===note.id)) { showToast("Already in cart.", "info"); return; }
+        setCart(p => [...p,note]);
+        showToast(`"${(note.title||"Note").slice(0,30)}" added to cart.`);
+      };
+
+      const removeFromCart = id => setCart(p => p.filter(c => c.id!==id));
+
+      const logout = async () => {
+        await supabase.auth.signOut();
+        setUser(null); setPurchases([]); setIsAdmin(false); setAdminAuthed(false);
+        showToast("Signed out.");
+        go("home");
+      };
+
+      const checkout = async () => {
+        const { data: { user: u } } = await supabase.auth.getUser();
+        if (!u) { setCartOpen(false); go("login"); return; }
+        const rows = cart.map(n => ({ buyer_id:u.id, note_id:n.id, amount:n.price }));
+        const { error } = await supabase.from("purchases").insert(rows);
+        if (error) { showToast("Checkout failed: "+error.message,"error"); return; }
+        await fetchPurchases(u.id);
+        setCart([]); setCartOpen(false);
+        showToast("Purchase successful. Check My Library.");
+        go("library");
+      };
+
+      const np = { notes, notesLoading, notesError };
+
+      return (
+        <div>
+          <Navbar page={page} go={go} cart={cart} setCartOpen={setCartOpen} user={user} logout={logout} isAdmin={isAdmin}/>
+          {cartOpen && <CartDrawer cart={cart} remove={removeFromCart} close={() => setCartOpen(false)} go={go} onCheckout={checkout}/>}
+          {toast    && <Toast msg={toast.msg} type={toast.type}/>} 
+          <PreviewModal preview={previewModal} onClose={() => setPreviewModal(null)}/>
+
+          {page==="home"      && <Home       go={go} addToCart={addToCart} {...np} purchases={purchases} openPreview={openPreview}/>}
+          {page==="browse"    && <Browse     go={go} addToCart={addToCart} {...np} purchases={purchases} openPreview={openPreview}/>}
+          {page==="subject"   && (ctx.subject
+            ? <SubjectPage subject={ctx.subject} go={go} addToCart={addToCart} {...np} purchases={purchases} openPreview={openPreview}/>
+            : <Browse go={go} addToCart={addToCart} {...np} purchases={purchases} openPreview={openPreview}/>
+          )}
+          {page==="sell"      && <Sell       user={user} go={go} showToast={showToast}/>}
+          {page==="profile"   && <Profile    go={go} addToCart={addToCart} notes={notes} notesLoading={notesLoading} purchases={purchases} openPreview={openPreview}/>}
+          {page==="library"   && <Library    go={go} notes={notes} purchases={purchases} addToCart={addToCart} openPreview={openPreview}/>}
+          {page==="sellers"   && <Sellers    go={go} addToCart={addToCart} notes={notes} notesLoading={notesLoading} purchases={purchases} openPreview={openPreview}/>}
+          {page==="community" && <Community  user={user} go={go}/>}
+          {page==="login"     && <Auth       mode="login"    setUser={setUser} go={go} showToast={showToast}/>}
+          {page==="register"  && <Auth       mode="register" setUser={setUser} go={go} showToast={showToast}/>}
+          {page==="privacy"   && <PrivacyPolicy go={go}/>}
+          {page==="terms"     && <TermsOfService go={go}/>}
+          {page==="cookies"   && <CookiePolicy go={go}/>}
+          {page==="admin"     && (adminAuthed
+            ? <AdminPanel go={go} showToast={showToast} refreshNotes={fetchNotes} openPreview={openPreview}/>
+            : <AdminLogin onLogin={() => setAdminAuthed(true)} showToast={showToast}/>
+          )}
+
+          {page !== "admin" && <Footer go={go}/>}
+
+          {/* ── COOKIE BANNER ── */}
+          {!cookieConsent && (
+            <div className="cookie-banner">
+              <p className="cookie-text">
+                We use cookies to keep you signed in and, with your consent, to understand how the site is used.
+                See our <button className="link-btn" style={{color:"var(--sienna2)",fontSize:"inherit"}} onClick={() => go("cookies")}>Cookie Policy</button> and <button className="link-btn" style={{color:"var(--sienna2)",fontSize:"inherit"}} onClick={() => go("privacy")}>Privacy Policy</button>.
+              </p>
+              <div className="cookie-btns">
+                <button className="cookie-decline" onClick={declineCookies}>Decline</button>
+                <button className="cookie-accept"  onClick={acceptCookies}>Accept Cookies</button>
+              </div>
+            </div>
+          )}
+
+          {/* ── BACK TO TOP ── */}
+          <button className={`back-to-top ${showBackTop?"visible":""}`} onClick={() => window.scrollTo({top:0,behavior:"smooth"})} aria-label="Back to top">↑</button>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+  </script>
+</body>
+</html>
