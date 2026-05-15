@@ -868,7 +868,7 @@
                   <div className="scard-icon" style={{fontFamily:"'Cormorant Garamond',serif",fontWeight:700,fontSize:"1.6rem",color:"var(--sienna)"}}>{s.icon}</div>
                   <div className="scard-name">{s.name}</div>
                   <div className="scard-desc">{s.desc}</div>
-                  <div className="scard-count">{notes.filter(n => n.is_approved !== false && subjectMatch(n.subject, s)).length} notes</div>
+                  <div className="scard-count">{notes.filter(n => n.is_approved !== false && !n.is_deleted && subjectMatch(n.subject, s)).length} notes</div>
                 </div>
               ))}
             </div>
@@ -885,9 +885,9 @@
               {notesError && <div className="error-banner">Could not load notes: {notesError}</div>}
               {notesLoading
                 ? <div className="notes-grid">{[1,2,3].map(i => <SkeletonCard key={i}/>)}</div>
-                : notes.filter(n => n.is_approved !== false).length === 0 && !notesError
+                : notes.filter(n => n.is_approved !== false && !n.is_deleted).length === 0 && !notesError
                   ? <div className="empty" style={{color:"rgba(255,255,255,0.3)"}}>No notes yet — add rows from the Supabase Table Editor.</div>
-                  : <div className="notes-grid">{notes.filter(n => n.is_approved !== false).slice(0,6).map(n => <NoteCard key={n.id} note={n} addToCart={addToCart} purchases={purchases} openPreview={openPreview}/>)}</div>
+                  : <div className="notes-grid">{notes.filter(n => n.is_approved !== false && !n.is_deleted).slice(0,6).map(n => <NoteCard key={n.id} note={n} addToCart={addToCart} purchases={purchases} openPreview={openPreview}/>)}</div>
               }
             </div>
           </div>
@@ -954,7 +954,7 @@
       const [sort, setSort] = useState("default");
 
       const shown = notes
-        .filter(n => n.is_approved !== false)
+        .filter(n => n.is_approved !== false && !n.is_deleted)
         .filter(n => {
           if (subj === "all") return true;
           const entry = SUBJECTS.find(s => s.id === subj);
@@ -1012,7 +1012,7 @@
     // ── SUBJECT PAGE ─────────────────────────────────────────────────────
     function SubjectPage({ subject, go, addToCart, notes, notesLoading, purchases, openPreview }) {
       if (!subject) { go("browse"); return null; }
-      const filtered = notes.filter(n => n.is_approved !== false && subjectMatch(n.subject, subject));
+      const filtered = notes.filter(n => n.is_approved !== false && !n.is_deleted && subjectMatch(n.subject, subject));
       return (
         <div className="page-wrap">
           <button className="back-btn" onClick={() => go("browse")}>← Back to Browse</button>
@@ -1367,7 +1367,7 @@
       const deleteNote = async (noteId) => {
         if (!window.confirm("Delete this note? This cannot be undone.")) return;
         setDeletingId(noteId);
-        const { error } = await supabase.from("notes").delete().eq("id", noteId);
+        const { error } = await supabase.from("notes").update({ is_deleted:true }).eq("id", noteId);
         setDeletingId(null);
         if (error) { alert("Delete failed: " + error.message); return; }
         setNotes(prev => prev.filter(n => n.id !== noteId));
@@ -1635,7 +1635,7 @@
         );
 
       if (selected) {
-        const sellerNotes = notes.filter(n => n.is_approved !== false && n.seller_id === selected.id);
+        const sellerNotes = notes.filter(n => n.is_approved !== false && !n.is_deleted && n.seller_id === selected.id);
         return (
           <div className="page-wrap">
             <button className="back-btn" onClick={() => setSelected(null)}>← Back to Sellers</button>
